@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-display: 'Syne', 'Playfair Display', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --color-charcoal: #14161A;
+  --color-charcoal-light: #1E222A;
+  --color-charcoal-card: #191C23;
+  --color-charcoal-border: #2A2F3A;
+
+  --color-orange: #FF5A1F;
+  --color-orange-hover: #E04B14;
+  --color-orange-light: rgba(255, 90, 31, 0.1);
+
+  --color-warm-white: #E8E6E1;
+  --color-warm-white-muted: #D3CF86;
+  --color-warm-bg: #F4F2EC;
+  --color-warm-card: #FAF9F6;
+  --color-warm-border: #D8D4CA;
+
+  --color-grey-text: #8A8F98;
+  --color-grey-dark: #585D66;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: #14161A;
+    color: #E8E6E1;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+  }
+}
+
+/* Custom Editorial Styling Utilities */
+.font-editorial-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  letter-spacing: -0.02em;
+}
+
+.font-editorial-statement {
+  font-family: 'Syne', 'Playfair Display', sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.subtle-orange-glow {
+  box-shadow: 0 0 25px -5px rgba(255, 90, 31, 0.15);
+}
+
+.subtle-dark-shadow {
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.subtle-light-shadow {
+  box-shadow: 0 10px 30px -10px rgba(20, 22, 26, 0.08);
+}
+
+/* Accessibility & Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
