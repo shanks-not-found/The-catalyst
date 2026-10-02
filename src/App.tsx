@@ -7,10 +7,14 @@ import { Partner } from "./pages/Partner";
 import { Episodes } from "./pages/Episodes";
 import { Contact } from "./pages/Contact";
 import { RegistrationHub } from "./pages/RegistrationHub";
+import { ScrollProgress } from "./components/ScrollProgress";
+import { PageLoader } from "./components/PageLoader";
 
 export function App() {
   return (
     <Router>
+      <PageLoader />
+      <ScrollProgress />
       <div className="min-h-screen flex flex-col bg-white text-[#111827] antialiased">
         <Header />
         <main className="flex-grow">

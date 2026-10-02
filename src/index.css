@@ -67,6 +67,70 @@
   box-shadow: 0 10px 30px -10px rgba(20, 22, 26, 0.08);
 }
 
+/* Scroll Reveal Base Utilities */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-init.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Loader Animation Keyframe */
+@keyframes loaderLine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-loaderLine {
+  animation: loaderLine 1.2s ease-in-out infinite;
+}
+
+/* Hero Entrance Sequence */
+@keyframes heroEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-eyebrow {
+  opacity: 0;
+  animation: heroEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+.animate-hero-headline {
+  opacity: 0;
+  animation: heroEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards;
+}
+
+.animate-hero-subhead {
+  opacity: 0;
+  animation: heroEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+
+.animate-hero-cta {
+  opacity: 0;
+  animation: heroEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards;
+}
+
+.animate-hero-card {
+  opacity: 0;
+  animation: heroEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+}
+
 /* Accessibility & Motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
@@ -75,4 +139,18 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .reveal-init {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .animate-hero-eyebrow,
+  .animate-hero-headline,
+  .animate-hero-subhead,
+  .animate-hero-cta {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
 }
+

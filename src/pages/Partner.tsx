@@ -50,7 +50,7 @@ export const Partner: React.FC = () => {
       </section>
 
       {/* 2. TWO WAYS TO PARTNER */}
-      <section className="py-20 lg:py-28 bg-[#F8F9FA] text-[#111827] border-b border-gray-200" id="two-ways-to-partner">
+      <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200" id="two-ways-to-partner">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="max-w-3xl space-y-4">
             <span className="text-[11px] uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block">
@@ -68,7 +68,7 @@ export const Partner: React.FC = () => {
             {twoWaysToPartner.cards.map((card) => (
               <div
                 key={card.number}
-                className="bg-white border border-gray-200 p-8 sm:p-10 rounded-xs space-y-6 shadow-xs flex flex-col justify-between hover:border-[#FF5A1F] transition-all group"
+                className="bg-[#FFF9F5] border border-[#FF5A1F]/20 p-8 sm:p-10 rounded-xs space-y-6 shadow-xs flex flex-col justify-between hover:border-[#FF5A1F] transition-all group"
               >
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
@@ -90,7 +90,7 @@ export const Partner: React.FC = () => {
                   </div>
 
                   {card.benefits && (
-                    <div className="space-y-2 pt-2 border-t border-gray-200">
+                    <div className="space-y-2 pt-2 border-t border-[#FF5A1F]/15">
                       <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest block font-semibold">
                         BENEFITS INCLUDE:
                       </span>
@@ -106,7 +106,7 @@ export const Partner: React.FC = () => {
                   )}
 
                   {card.categories && (
-                    <div className="space-y-2 pt-2 border-t border-gray-200">
+                    <div className="space-y-2 pt-2 border-t border-[#FF5A1F]/15">
                       <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest block font-semibold">
                         CATEGORIES INCLUDE:
                       </span>
@@ -114,7 +114,7 @@ export const Partner: React.FC = () => {
                         {card.categories.map((c, i) => (
                           <span
                             key={i}
-                            className="px-2.5 py-1 bg-gray-100 text-[11px] font-semibold text-gray-800 rounded-xs"
+                            className="px-2.5 py-1 bg-white border border-[#FF5A1F]/15 text-[11px] font-semibold text-gray-800 rounded-xs"
                           >
                             {c}
                           </span>
@@ -124,7 +124,7 @@ export const Partner: React.FC = () => {
                   )}
                 </div>
 
-                <div className="pt-6 border-t border-gray-200">
+                <div className="pt-6 border-t border-[#FF5A1F]/15">
                   <a
                     href={card.href}
                     className="inline-flex items-center text-xs font-bold text-gray-900 group-hover:text-[#FF5A1F] transition-colors"
@@ -159,7 +159,7 @@ export const Partner: React.FC = () => {
       </section>
 
       {/* 4. WHAT PARTNERS RECEIVE */}
-      <section className="py-20 lg:py-28 bg-[#F8F9FA] text-[#111827] border-b border-gray-200">
+      <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="max-w-3xl space-y-3">
             <span className="text-[11px] uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block">
@@ -174,7 +174,7 @@ export const Partner: React.FC = () => {
             {whatPartnersReceive.items.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white border border-gray-200 p-6 sm:p-8 rounded-xs space-y-3 hover:border-[#FF5A1F] transition-all shadow-xs"
+                className="bg-[#FFF9F5] border border-[#FF5A1F]/20 p-6 sm:p-8 rounded-xs space-y-3 hover:border-[#FF5A1F] transition-all shadow-xs"
               >
                 <div className="w-7 h-7 rounded-xs bg-[#FF5A1F]/10 text-[#FF5A1F] font-mono font-bold text-xs flex items-center justify-center">
                   0{idx + 1}
@@ -204,7 +204,7 @@ export const Partner: React.FC = () => {
       </section>
 
       {/* 6. BUILD FROM THE BEGINNING */}
-      <section className="py-20 lg:py-28 bg-[#F8F9FA] text-[#111827] border-b border-gray-200">
+      <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="max-w-3xl space-y-4">
             <span className="text-[10px] uppercase font-mono tracking-widest text-[#FF5A1F] block font-bold">
@@ -222,7 +222,7 @@ export const Partner: React.FC = () => {
             {buildFromBeginning.cards.map((card) => (
               <div
                 key={card.number}
-                className="bg-white border border-gray-200 p-8 rounded-xs space-y-4 hover:border-[#FF5A1F] transition-all shadow-xs"
+                className="bg-[#FFF9F5] border border-[#FF5A1F]/20 p-8 rounded-xs space-y-4 hover:border-[#FF5A1F] transition-all shadow-xs"
               >
                 <div className="text-xs font-mono font-bold text-[#FF5A1F]">
                   {card.number}
@@ -242,7 +242,7 @@ export const Partner: React.FC = () => {
       {/* 7. FINAL PARTNER CTA */}
       <section className="py-20 lg:py-28 bg-white text-[#111827]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-[#F8F9FA] border border-gray-200 p-8 sm:p-12 lg:p-16 rounded-xs space-y-8 shadow-xl text-center">
+          <div className="bg-[#FFF9F5] border border-[#FF5A1F]/25 p-8 sm:p-12 lg:p-16 rounded-xs space-y-8 shadow-xl text-center">
             <div className="max-w-2xl mx-auto space-y-4">
               <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF5A1F] block font-bold">
                 START A CONVERSATION
@@ -270,3 +270,4 @@ export const Partner: React.FC = () => {
   );
 };
 
+export default Partner;

@@ -1,18 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Play, Calendar, MapPin, Sparkles, ShieldAlert } from "lucide-react";
+import { Play, Calendar, MapPin, Sparkles, ShieldAlert, ArrowRight } from "lucide-react";
 import { EPISODES_CONTENT } from "../data/content";
 
 export const EpisodeCard: React.FC = () => {
   const ep = EPISODES_CONTENT.episode01;
 
   return (
-    <div className="w-full bg-white border border-gray-200 rounded-xs overflow-hidden shadow-xl hover:border-[#FF5A1F]/40 transition-colors">
+    <div className="w-full bg-[#FFF9F5] border border-[#FF5A1F]/25 rounded-xs overflow-hidden shadow-sm hover:shadow-md hover:border-[#FF5A1F]/50 transition-all duration-300">
       <div className="grid grid-cols-1 lg:grid-cols-12">
         {/* Video Thumbnail Placeholder Frame */}
-        <div className="lg:col-span-5 relative bg-gradient-to-br from-gray-100 via-gray-50 to-white p-8 min-h-[300px] flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-gray-200 group">
-          {/* Subtle Video Grid Overlay */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:24px_24px] opacity-60 pointer-events-none" />
+        <div 
+          className="lg:col-span-5 relative p-8 min-h-[300px] flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-[#FF5A1F]/15 group bg-cover bg-center rounded-xs overflow-hidden"
+          style={{ backgroundImage: "url('/coming-soon-bg.jpg')" }}
+        >
+          {/* Subtle neutral overlay for content readability */}
+          <div className="absolute inset-0 bg-black/20 pointer-events-none" />
 
           <div className="relative z-10 flex items-center justify-between">
             <span className="px-3 py-1 bg-[#FF5A1F] text-white text-[10px] uppercase font-mono font-bold tracking-widest rounded-xs">
@@ -25,25 +28,25 @@ export const EpisodeCard: React.FC = () => {
           </div>
 
           <div className="relative z-10 my-auto py-8 text-center space-y-3">
-            <div className="w-16 h-16 mx-auto rounded-full bg-[#FF5A1F]/15 border border-[#FF5A1F]/40 text-[#FF5A1F] flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-[#FF5A1F] group-hover:text-white transition-all duration-300 cursor-pointer">
+            <div className="w-16 h-16 mx-auto rounded-full bg-[#FF5A1F]/20 border border-[#FF5A1F]/60 text-[#FF5A1F] flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-[#FF5A1F] group-hover:text-white transition-all duration-300 cursor-pointer backdrop-blur-xs">
               <Play className="w-7 h-7 ml-1 fill-current" />
             </div>
             <div className="space-y-1">
               <p className="text-xs font-mono text-[#FF5A1F] font-bold tracking-widest uppercase">
                 {ep.videoStatus}
               </p>
-              <p className="text-[11px] font-mono text-gray-500 uppercase tracking-widest">
+              <p className="text-[11px] font-mono text-gray-300 uppercase tracking-widest">
                 {ep.brandText}
               </p>
             </div>
           </div>
 
-          <div className="relative z-10 flex flex-wrap items-center justify-between text-xs text-gray-500 pt-4 border-t border-gray-200 gap-2">
-            <span className="flex items-center font-mono text-[11px] text-gray-700">
+          <div className="relative z-10 flex flex-wrap items-center justify-between text-xs text-gray-300 pt-4 border-t border-white/20 gap-2">
+            <span className="flex items-center font-mono text-[11px] text-gray-200">
               <Calendar className="w-3.5 h-3.5 mr-1.5 text-[#FF5A1F]" />
               {ep.date}
             </span>
-            <span className="flex items-center font-mono text-[11px] text-gray-700">
+            <span className="flex items-center font-mono text-[11px] text-gray-200">
               <MapPin className="w-3.5 h-3.5 mr-1.5 text-[#FF5A1F]" />
               {ep.venue}
             </span>
@@ -78,7 +81,7 @@ export const EpisodeCard: React.FC = () => {
             </div>
           </div>
 
-          <div className="pt-6 border-t border-gray-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+          <div className="pt-6 border-t border-[#FF5A1F]/15 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
             <div className="text-xs text-gray-600 flex items-center">
               <Sparkles className="w-3.5 h-3.5 mr-1.5 text-[#FF5A1F]" />
               <span>Closed-door recording at T-Hub, Hyderabad</span>
@@ -87,9 +90,10 @@ export const EpisodeCard: React.FC = () => {
             <div className="flex flex-wrap items-center gap-2">
               <Link
                 to="/register"
-                className="px-6 py-3.5 bg-[#FF5A1F] hover:bg-[#E04B14] text-white text-xs font-bold uppercase tracking-widest rounded-xs transition-colors shadow-md flex items-center justify-center space-x-2 shrink-0"
+                className="px-6 py-3.5 bg-[#FF5A1F] hover:bg-[#E04B14] text-white text-xs font-bold uppercase tracking-widest rounded-xs transition-all duration-200 hover:-translate-y-[1px] shadow-md flex items-center justify-center space-x-2 shrink-0 group"
               >
-                <span>REGISTER →</span>
+                <span>REGISTER</span>
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
             </div>
           </div>
@@ -98,4 +102,3 @@ export const EpisodeCard: React.FC = () => {
     </div>
   );
 };
-

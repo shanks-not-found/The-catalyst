@@ -32,15 +32,15 @@ export const Header: React.FC = () => {
   }, [isMobileMenuOpen]);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/95 backdrop-blur-md border-b border-gray-200 py-2.5 shadow-sm"
-          : "bg-white/90 backdrop-blur-sm border-b border-gray-100 py-3.5"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 pointer-events-none">
+      <div
+        className={`pointer-events-auto transition-all duration-300 ${
+          isScrolled
+            ? "mx-3 sm:mx-6 lg:mx-auto max-w-7xl mt-2 sm:mt-3 bg-white/80 backdrop-blur-lg border border-black/10 shadow-md shadow-gray-900/5 py-2 sm:py-2.5 px-4 sm:px-6 rounded-lg sm:rounded-xl"
+            : "w-full bg-white/95 backdrop-blur-md border-b border-gray-100 py-3.5 px-4 sm:px-6 lg:px-8"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo Image with seamless blend & prominent presence */}
           <Link
             to="/"
@@ -81,9 +81,10 @@ export const Header: React.FC = () => {
           <div className="hidden md:flex items-center space-x-3">
             <Link
               to="/register"
-              className="px-6 py-2.5 bg-[#FF5A1F] hover:bg-[#E04B14] text-white text-xs font-bold uppercase tracking-widest rounded-xs transition-colors shadow-sm inline-flex items-center space-x-2"
+              className="px-6 py-2.5 bg-[#FF5A1F] hover:bg-[#E04B14] text-white text-xs font-bold uppercase tracking-widest rounded-xs transition-all duration-200 hover:-translate-y-[1px] shadow-sm inline-flex items-center space-x-2 group"
             >
               <span>REGISTER</span>
+              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
           </div>
 
@@ -110,7 +111,7 @@ export const Header: React.FC = () => {
 
       {/* Mobile Drawer Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 top-[60px] z-40 bg-white/98 backdrop-blur-xl border-t border-gray-200 flex flex-col justify-between px-6 py-6 animate-fadeIn text-gray-900 overflow-y-auto">
+        <div className="md:hidden pointer-events-auto fixed inset-0 top-[64px] z-40 bg-white/98 backdrop-blur-xl border-t border-gray-200 flex flex-col justify-between px-6 py-6 animate-fadeIn text-gray-900 overflow-y-auto">
           <nav className="flex flex-col space-y-4 pt-2">
             <div className="text-[10px] uppercase tracking-widest text-gray-500 font-mono flex items-center">
               <Sparkles className="w-3 h-3 mr-1 text-[#FF5A1F]" /> Navigation
@@ -138,10 +139,10 @@ export const Header: React.FC = () => {
             <Link
               to="/register"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full py-4 px-4 text-xs font-bold uppercase tracking-widest text-white bg-[#FF5A1F] active:bg-[#E04B14] rounded-xs shadow-md flex items-center justify-between"
+              className="w-full py-4 px-4 text-xs font-bold uppercase tracking-widest text-white bg-[#FF5A1F] active:bg-[#E04B14] rounded-xs shadow-md flex items-center justify-between group"
             >
               <span>REGISTER</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
           </div>
         </div>

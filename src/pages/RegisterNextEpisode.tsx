@@ -84,11 +84,11 @@ export const RegisterNextEpisode: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. UPCOMING EPISODE SNAPSHOT BOX */}
-      <section className="py-12 bg-[#F8F9FA] border-b border-gray-200">
+      {/* 2. UPCOMING EPISODE SNAPSHOT BOX (SUBTLE SOFT GRAY #F7F7F7) */}
+      <section className="py-12 bg-[#F7F7F7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white border border-gray-200 p-6 sm:p-10 rounded-xs shadow-xl space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-6">
+          <div className="bg-[#FFF9F5] border border-[#FF5A1F]/20 p-6 sm:p-10 rounded-xs shadow-sm space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200/80 pb-6">
               <div>
                 <span className="px-3 py-1 bg-[#FF5A1F] text-white text-[10px] font-mono font-bold uppercase tracking-widest rounded-xs">
                   {episodeDetails.number}
@@ -120,8 +120,8 @@ export const RegisterNextEpisode: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. ABOUT THE NEXT EPISODE & OBJECTIVE */}
-      <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
+      {/* 3. ABOUT THE NEXT EPISODE & OBJECTIVE (WHITE) */}
+      <section className="py-20 lg:py-28 bg-white text-[#111827]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           {/* About Next Episode */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
@@ -161,7 +161,7 @@ export const RegisterNextEpisode: React.FC = () => {
               {objective.points.map((pt, idx) => (
                 <div
                   key={idx}
-                  className="bg-gray-50 border border-gray-200 p-5 rounded-xs space-y-2 hover:border-[#FF5A1F] transition-all shadow-xs"
+                  className="bg-[#FFF9F5] border border-[#FF5A1F]/20 p-5 rounded-xs space-y-2 hover:border-[#FF5A1F] transition-all shadow-xs"
                 >
                   <span className="text-[10px] font-mono text-[#FF5A1F] font-bold">
                     0{idx + 1}
@@ -176,8 +176,8 @@ export const RegisterNextEpisode: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. THIS IS FOR: AUDIENCE SELECTION */}
-      <section className="py-20 lg:py-28 bg-[#F8F9FA] text-[#111827] border-b border-gray-200">
+      {/* 4. THIS IS FOR: AUDIENCE SELECTION (SUBTLE SOFT GRAY #F7F7F7) */}
+      <section className="py-20 lg:py-28 bg-[#F7F7F7] text-[#111827]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="max-w-2xl space-y-3">
             <span className="text-[10px] uppercase font-mono tracking-widest text-[#FF5A1F] block font-bold">
@@ -192,7 +192,7 @@ export const RegisterNextEpisode: React.FC = () => {
             {thisIsFor.audiences.map((aud, idx) => (
               <div
                 key={idx}
-                className="bg-white border border-gray-200 p-6 rounded-xs space-y-3 hover:border-[#FF5A1F] transition-all shadow-xs"
+                className="bg-[#FFF9F5] border border-[#FF5A1F]/20 p-6 rounded-xs space-y-3 hover:border-[#FF5A1F] transition-all shadow-xs"
               >
                 <div className="w-7 h-7 rounded-xs bg-[#FF5A1F]/10 text-[#FF5A1F] font-mono font-bold text-xs flex items-center justify-center">
                   0{idx + 1}
@@ -209,10 +209,10 @@ export const RegisterNextEpisode: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. WHO GETS INVITED? CURATION CRITERIA */}
-      <section className="py-16 bg-white text-[#111827] border-b border-gray-200">
+      {/* 5. WHO GETS INVITED? CURATION CRITERIA (WHITE) */}
+      <section className="py-16 bg-white text-[#111827]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gray-50 border border-gray-200 p-8 sm:p-12 rounded-xs space-y-6 shadow-xs">
+          <div className="bg-[#FFF9F5] border border-[#FF5A1F]/20 p-8 sm:p-12 rounded-xs space-y-6 shadow-xs">
             <div className="max-w-3xl space-y-3">
               <span className="text-[11px] uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block">
                 ROOM CURATION PROCESS
@@ -225,7 +225,7 @@ export const RegisterNextEpisode: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-gray-200">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-gray-200/80">
               {curationCriteria.notes.map((note, idx) => (
                 <div key={idx} className="flex items-start space-x-2 text-xs text-gray-700">
                   <Sparkles className="w-3.5 h-3.5 text-[#FF5A1F] shrink-0 mt-0.5" />
@@ -237,8 +237,8 @@ export const RegisterNextEpisode: React.FC = () => {
         </div>
       </section>
 
-      {/* 6. REGISTRATION FORM SECTION */}
-      <section className="py-20 lg:py-28 bg-[#F8F9FA] text-[#111827]" id="registration-form">
+      {/* 6. REGISTRATION FORM SECTION (SUBTLE SOFT GRAY #F7F7F7) */}
+      <section className="py-20 lg:py-28 bg-[#F7F7F7] text-[#111827]" id="registration-form">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="text-center space-y-3">
             <span className="text-[10px] uppercase font-mono tracking-widest text-[#FF5A1F] block font-bold">
@@ -253,7 +253,7 @@ export const RegisterNextEpisode: React.FC = () => {
           </div>
 
           {isSubmitted ? (
-            <div className="p-8 bg-white border border-[#FF5A1F] rounded-xs space-y-6 animate-fadeIn shadow-xl text-center">
+            <div className="p-8 bg-[#FFF9F5] border border-[#FF5A1F] rounded-xs space-y-6 animate-fadeIn shadow-xl text-center">
               <div className="w-12 h-12 mx-auto rounded-full bg-[#FF5A1F]/10 text-[#FF5A1F] flex items-center justify-center">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
@@ -295,7 +295,7 @@ export const RegisterNextEpisode: React.FC = () => {
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="bg-white border border-gray-200 p-6 sm:p-10 rounded-xs shadow-xl space-y-8" noValidate>
+            <form onSubmit={handleSubmit} className="bg-[#FFF9F5] border border-[#FF5A1F]/20 p-6 sm:p-10 rounded-xs shadow-md space-y-8" noValidate>
               {/* Group 1: Personal Details */}
               <div className="space-y-4">
                 <h3 className="text-xs font-mono uppercase tracking-widest text-[#FF5A1F] font-bold border-b border-gray-200 pb-2">

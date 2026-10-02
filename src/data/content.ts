@@ -34,10 +34,6 @@ export const SITE_METADATA = {
   title: "The Catalyst Room",
   tagline: "Where Conversations Create Momentum",
   domain: "catalyst.tech",
-  founder: "John Garapati",
-  founderRole: "Founder, The Catalyst Room",
-  email: "john@treviaev.in",
-  phone: "+91 9704202806",
   location: "Hyderabad, India",
   copyrightYear: 2026,
   footerDescription:
@@ -49,7 +45,7 @@ export const NAV_ITEMS = [
   { label: "About", href: "/about" },
   { label: "Partner With Us", href: "/partner" },
   { label: "Episodes", href: "/episodes" },
-  { label: "Contact", href: "/contact" },
+  { label: "Speak With Us", href: "/contact" },
 ];
 
 export const HOME_CONTENT = {
@@ -753,41 +749,6 @@ export const CONTACT_CONTENT = {
       "Other",
     ],
     submitText: "START THE CONVERSATION →",
-  },
-  directContact: {
-    heading: "DIRECT CONTACT",
-    name: "John Garapati",
-    role: "Founder, The Catalyst Room",
-    email: "john@treviaev.in",
-    phone: "+91 9704202806",
-    location: "Hyderabad, India",
-    platform: "catalyst.tech",
-  },
-  whoShouldReachOut: {
-    eyebrow: "THE ROOM IS OPEN TO THE RIGHT PEOPLE",
-    headline: "WHO SHOULD REACH OUT?",
-    cards: [
-      {
-        title: "FOUNDERS",
-        description:
-          "Building something real and looking to connect with the right people.",
-      },
-      {
-        title: "INVESTORS & BUSINESS LEADERS",
-        description:
-          "Interested in meeting founders and contributing to meaningful ecosystem conversations.",
-      },
-      {
-        title: "PARTNERS & BRANDS",
-        description:
-          "Looking to build meaningful visibility and relationships within the startup ecosystem.",
-      },
-      {
-        title: "MEDIA & CREATORS",
-        description:
-          "Interested in collaborating around founder stories, conversations and content.",
-      },
-    ],
   },
   finalCta: {
     headline: "HAVE SOMETHING ELSE IN MIND?",

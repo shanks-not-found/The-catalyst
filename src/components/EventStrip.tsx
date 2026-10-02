@@ -20,13 +20,13 @@ export const EventStrip: React.FC = () => {
   };
 
   return (
-    <div className="w-full bg-[#F8F9FA] border-y border-gray-200 py-6 my-8">
+    <div className="w-full bg-white border-y border-gray-200 py-6 my-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
           {eventStrip.map((item, idx) => (
             <div
               key={idx}
-              className="bg-white border border-gray-200 p-4 rounded-xs flex items-start space-x-3 hover:border-[#FF5A1F] transition-colors shadow-xs"
+              className="bg-[#FFF9F5] border border-[#FF5A1F]/20 p-4 rounded-xs flex items-start space-x-3 hover:border-[#FF5A1F] transition-colors shadow-xs"
             >
               <div className="p-2 bg-[#FF5A1F]/10 text-[#FF5A1F] rounded-xs mt-0.5 shrink-0">
                 {getIcon(idx)}
