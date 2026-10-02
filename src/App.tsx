@@ -1,17 +1,17 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { Header } from "./components/Header";
-
 import { Footer } from "./components/Footer";
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Partner } from "./pages/Partner";
 import { Episodes } from "./pages/Episodes";
 import { Contact } from "./pages/Contact";
+import { RegistrationHub } from "./pages/RegistrationHub";
 
 export function App() {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-[#14161A] text-[#E8E6E1] antialiased">
+      <div className="min-h-screen flex flex-col bg-white text-[#111827] antialiased">
         <Header />
         <main className="flex-grow">
           <Routes>
@@ -20,6 +20,10 @@ export function App() {
             <Route path="/partner" element={<Partner />} />
             <Route path="/episodes" element={<Episodes />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/register" element={<RegistrationHub />} />
+            <Route path="/register/guest" element={<Navigate to="/register" replace />} />
+            <Route path="/register/founder" element={<Navigate to="/register" replace />} />
+            <Route path="/register/partner" element={<Navigate to="/register" replace />} />
             {/* Catch-all fallback */}
             <Route path="*" element={<Home />} />
           </Routes>
@@ -31,3 +35,4 @@ export function App() {
 }
 
 export default App;
+

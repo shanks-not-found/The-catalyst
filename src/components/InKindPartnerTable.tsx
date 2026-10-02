@@ -1,72 +1,48 @@
 import React from "react";
-import { Mail } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Handshake } from "lucide-react";
 import { PARTNER_CONTENT } from "../data/content";
 
-
 export const InKindPartnerTable: React.FC = () => {
-  const { inKindSection } = PARTNER_CONTENT;
+  const { strategicPartnerships } = PARTNER_CONTENT;
 
   return (
-    <div className="w-full space-y-8">
-      {/* Intro Box */}
-      <div className="bg-[#14161A] border-l-4 border-l-[#FF5A1F] border border-[#2A2F3A] p-6 sm:p-8 rounded-xs shadow-lg">
-        <h3 className="font-editorial-heading text-2xl font-bold text-[#E8E6E1] mb-3">
-          {inKindSection.heading}
-        </h3>
-        <p className="font-serif italic text-base sm:text-lg text-[#E8E6E1]/90 leading-relaxed">
-          "{inKindSection.intro}"
+    <div className="w-full space-y-10" id="strategic-partnerships">
+      {/* Intro Header */}
+      <div className="max-w-3xl space-y-4">
+        <span className="text-[11px] uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block">
+          IN-KIND & INFRASTRUCTURE
+        </span>
+        <h2 className="font-editorial-heading text-3xl sm:text-4xl font-bold text-gray-900">
+          {strategicPartnerships.heading}
+        </h2>
+        <p className="text-base text-gray-700 leading-relaxed font-sans">
+          {strategicPartnerships.intro}
         </p>
       </div>
 
-      {/* Desktop Table */}
-      <div className="hidden md:block overflow-hidden rounded-xs border border-[#2A2F3A] bg-[#14161A] shadow-xl">
-        <table className="w-full text-left border-collapse">
-          <thead>
-            <tr className="bg-[#1E222A] border-b border-[#2A2F3A] text-[#8A8F98] font-mono text-[11px] uppercase tracking-widest">
-              <th className="py-4 px-6 font-semibold w-1/4">CATEGORY</th>
-              <th className="py-4 px-6 font-semibold w-2/5">CONTRIBUTION</th>
-              <th className="py-4 px-6 font-semibold w-1/3">PARTNER POSITION</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[#2A2F3A]">
-            {inKindSection.categories.map((item, idx) => (
-              <tr
-                key={idx}
-                className="hover:bg-[#1E222A]/40 transition-colors"
-              >
-                <td className="py-4 px-6 font-semibold text-xs text-[#E8E6E1] font-mono">
-                  {item.category}
-                </td>
-                <td className="py-4 px-6 text-xs text-[#E8E6E1]/80">
-                  {item.contribution}
-                </td>
-                <td className="py-4 px-6 text-xs font-semibold text-[#FF5A1F]">
-                  {item.partnerPosition}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Mobile Stacked Cards */}
-      <div className="md:hidden grid grid-cols-1 gap-4">
-        {inKindSection.categories.map((item, idx) => (
+      {/* Grid of Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {strategicPartnerships.categories.map((item, idx) => (
           <div
             key={idx}
-            className="p-5 bg-[#14161A] border border-[#2A2F3A] rounded-xs space-y-2 hover:border-[#FF5A1F]/30 transition-colors"
+            className="bg-white border border-gray-200 p-6 rounded-xs space-y-4 hover:border-[#FF5A1F] transition-all shadow-xs flex flex-col justify-between group"
           >
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#8A8F98]">
-                {item.category}
-              </span>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-mono font-bold tracking-widest text-[#FF5A1F] uppercase">
+                  {item.category}
+                </span>
+                <Handshake className="w-4 h-4 text-gray-400 group-hover:text-[#FF5A1F] transition-colors" />
+              </div>
+              <p className="text-xs text-gray-600 leading-relaxed font-sans">
+                {item.description}
+              </p>
             </div>
-            <p className="text-xs font-medium text-[#E8E6E1]">
-              <span className="text-[#8A8F98]">Contribution:</span> {item.contribution}
-            </p>
-            <div className="pt-2 border-t border-[#2A2F3A]/60 flex items-center justify-between">
-              <span className="text-[10px] text-[#8A8F98]">POSITION</span>
-              <span className="text-xs font-semibold text-[#FF5A1F]">
+
+            <div className="pt-4 border-t border-gray-200 flex items-center justify-between">
+              <span className="text-[10px] font-mono text-gray-500 uppercase font-semibold">POSITION</span>
+              <span className="text-xs font-bold text-gray-900 group-hover:text-[#FF5A1F] transition-colors">
                 {item.partnerPosition}
               </span>
             </div>
@@ -74,19 +50,20 @@ export const InKindPartnerTable: React.FC = () => {
         ))}
       </div>
 
-      {/* Availability Note & Become a Partner CTA */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-4 border-t border-[#2A2F3A]">
-        <p className="text-xs text-[#8A8F98] italic">
-          {inKindSection.availabilityNote}
+      {/* Bottom Action Strip */}
+      <div className="pt-6 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <p className="text-xs text-gray-600 italic">
+          Opportunities are subject to relevance, availability and mutual fit.
         </p>
-        <a
-          href={inKindSection.cta.href}
-          className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-xs font-bold uppercase tracking-widest text-[#14161A] bg-[#FF5A1F] hover:bg-[#E04B14] rounded-xs transition-all shadow-md group"
+        <Link
+          to="/contact"
+          className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white bg-[#FF5A1F] hover:bg-[#E04B14] rounded-xs transition-all shadow-md group shrink-0"
         >
-          <span>{inKindSection.cta.text}</span>
-          <Mail className="w-3.5 h-3.5 ml-2 group-hover:scale-110 transition-transform" />
-        </a>
+          <span>BECOME A STRATEGIC PARTNER</span>
+          <ArrowRight className="w-3.5 h-3.5 ml-2 group-hover:translate-x-1 transition-transform" />
+        </Link>
       </div>
     </div>
   );
 };
+

@@ -1,61 +1,58 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Play, Sparkles, ArrowRight } from "lucide-react";
+import { Play, Lock, Layers } from "lucide-react";
 import { SEOHead } from "../components/SEOHead";
 import { EventStrip } from "../components/EventStrip";
-import { StatementBand } from "../components/StatementBand";
 import { HOME_CONTENT } from "../data/content";
 
-
 export const Home: React.FC = () => {
-  const { hero, platform, whyDifferent, longTermVision } = HOME_CONTENT;
+  const {
+    hero,
+    episode01Feature,
+    theFormat,
+    curatedRoomPositioning,
+    whoIsInTheRoom,
+    whyDifferent,
+    longTermVision,
+    buildWithTheRoom,
+  } = HOME_CONTENT;
 
   return (
     <div className="w-full">
       <SEOHead
-        title="Home"
-        description="The Catalyst Room is a curated founder platform bringing founders, investors, business leaders and ecosystem stakeholders into one room — beginning at T-Hub, Hyderabad."
+        title="The Catalyst Room — Where Conversations Create Momentum"
+        description="A curated business media and ecosystem platform bringing founders, investors, CEOs, GCC leaders and industry experts into one room."
       />
 
-      {/* 1. HERO SECTION (Dark Charcoal Background) */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-[#14161A] text-[#E8E6E1] border-b border-[#2A2F3A] overflow-hidden">
+      {/* 1. HERO SECTION */}
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-24 bg-white text-[#111827] border-b border-gray-200 overflow-hidden">
         {/* Subtle grid background */}
-        <div className="absolute inset-0 bg-[radial-gradient(#2A2F3A_1px,transparent_1px)] [background-size:32px_32px] opacity-15 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:32px_32px] opacity-60 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl space-y-6">
-            {/* Tagline Chip */}
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 bg-[#FF5A1F]/10 border border-[#FF5A1F]/30 rounded-xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#FF5A1F]" />
-              <span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A1F]">
-                {hero.taglineChip}
-              </span>
-            </div>
-
             {/* Headline */}
-            <h1 className="font-editorial-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#E8E6E1] leading-[1.08]">
-              BUILD THE ROOM.<br />
-              <span className="text-[#FF5A1F]">BUILD THE ECOSYSTEM.</span>
+            <h1 className="font-editorial-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#111827] leading-[1.08]">
+              {hero.headline}
             </h1>
 
             {/* Subheadline */}
-            <p className="text-base sm:text-xl text-[#E8E6E1]/85 font-sans leading-relaxed max-w-3xl font-light">
+            <p className="text-base sm:text-xl text-gray-600 font-sans leading-relaxed max-w-3xl font-normal">
               {hero.subheadline}
             </p>
 
             {/* CTA Group */}
             <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <Link
-                to={hero.primaryCta.href}
-                className="px-8 py-4 bg-[#FF5A1F] hover:bg-[#E04B14] text-[#14161A] text-xs font-bold uppercase tracking-widest rounded-xs transition-all shadow-lg hover:shadow-[#FF5A1F]/20 flex items-center justify-center space-x-2 group"
+                to="/register"
+                className="px-8 py-4 bg-[#FF5A1F] hover:bg-[#E04B14] text-white text-xs font-bold uppercase tracking-widest rounded-xs transition-all shadow-md hover:shadow-lg flex items-center justify-center space-x-2 group"
               >
-                <span>{hero.primaryCta.text}</span>
+                <span>REGISTER →</span>
               </Link>
               <Link
                 to={hero.secondaryCta.href}
-                className="px-8 py-4 bg-[#1E222A] hover:bg-[#252A34] border border-[#2A2F3A] text-[#E8E6E1] text-xs font-bold uppercase tracking-widest rounded-xs transition-all flex items-center justify-center space-x-2 group"
+                className="px-8 py-4 bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-900 text-xs font-bold uppercase tracking-widest rounded-xs transition-all flex items-center justify-center space-x-2 group"
               >
-                <Play className="w-3.5 h-3.5 text-[#FF5A1F] fill-[#FF5A1F] mr-1" />
                 <span>{hero.secondaryCta.text}</span>
               </Link>
             </div>
@@ -63,44 +60,72 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. EVENT STRIP */}
-      <EventStrip />
-
-      {/* 3. SECTION — THE PLATFORM (Alternating Light Warm White Section) */}
-      <section className="py-20 lg:py-28 bg-[#E8E6E1] text-[#14161A] border-b border-[#D8D4CA]">
+      {/* 2. EPISODE 01 — MAJOR HOMEPAGE SECTION */}
+      <section className="py-16 lg:py-24 bg-[#F8F9FA] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            <div className="lg:col-span-5 space-y-6">
-              <span className="text-[11px] uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block">
-                PLATFORM ARCHITECTURE
-              </span>
-              <h2 className="font-editorial-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-[#14161A] leading-tight">
-                {platform.headline}
-              </h2>
-              <div className="w-12 h-1 bg-[#FF5A1F] rounded-full" />
-            </div>
+          <div className="bg-white border border-gray-200 rounded-xs overflow-hidden shadow-xl hover:border-[#FF5A1F]/40 transition-colors">
+            <div className="grid grid-cols-1 lg:grid-cols-12">
+              {/* Media Frame Placeholder */}
+              <div className="lg:col-span-5 relative bg-gradient-to-br from-gray-100 via-gray-50 to-white p-8 min-h-[300px] flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-gray-200">
+                <div className="flex items-center justify-between">
+                  <span className="px-3 py-1 bg-[#FF5A1F] text-white text-[10px] uppercase font-mono font-bold tracking-widest rounded-xs">
+                    {episode01Feature.eyebrow}
+                  </span>
+                  <span className="text-[10px] font-mono text-[#FF5A1F] uppercase tracking-widest flex items-center">
+                    <span className="w-2 h-2 rounded-full bg-[#FF5A1F] animate-pulse mr-1.5" />
+                    {episode01Feature.statusBadge}
+                  </span>
+                </div>
 
-            <div className="lg:col-span-7 space-y-8">
-              <p className="text-base sm:text-lg text-[#14161A]/85 leading-relaxed font-sans">
-                {platform.body}
-              </p>
+                <div className="my-auto py-8 text-center space-y-3">
+                  <div className="w-16 h-16 mx-auto rounded-full bg-[#FF5A1F]/15 border border-[#FF5A1F]/40 text-[#FF5A1F] flex items-center justify-center shadow-md">
+                    <Play className="w-7 h-7 ml-1 fill-current" />
+                  </div>
+                  <p className="text-xs font-mono text-[#FF5A1F] font-bold tracking-widest uppercase">
+                    WATCH EPISODE → (COMING SOON)
+                  </p>
+                </div>
 
-              <div className="pt-6 border-t border-[#D8D4CA]">
-                <h3 className="text-xs uppercase font-mono tracking-widest text-[#14161A]/70 font-semibold mb-4">
-                  DESIGNED AROUND
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {platform.designedAround.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="p-3.5 bg-white border border-[#D8D4CA] rounded-xs flex items-center space-x-3 shadow-xs hover:border-[#FF5A1F] transition-colors"
-                    >
-                      <div className="w-2 h-2 rounded-full bg-[#FF5A1F]" />
-                      <span className="text-xs font-semibold text-[#14161A]">
-                        {item}
-                      </span>
-                    </div>
-                  ))}
+                <div className="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-gray-200">
+                  <span className="font-mono text-[11px] text-gray-700">
+                    {episode01Feature.subtext}
+                  </span>
+                </div>
+              </div>
+
+              {/* Content Details */}
+              <div className="lg:col-span-7 p-8 flex flex-col justify-between space-y-6">
+                <div className="space-y-4">
+                  <span className="text-xs font-mono uppercase tracking-widest text-[#FF5A1F] block">
+                    {episode01Feature.eyebrow} · INAUGURAL CONVERSATION
+                  </span>
+                  <h2 className="font-editorial-heading text-3xl sm:text-4xl font-bold text-gray-900 leading-tight">
+                    {episode01Feature.headline}
+                  </h2>
+                  <div>
+                    <h3 className="font-editorial-heading text-xl font-bold text-gray-900">
+                      {episode01Feature.guestName}
+                    </h3>
+                    <p className="text-xs font-mono text-[#FF5A1F] mt-0.5">
+                      {episode01Feature.guestRole}
+                    </p>
+                  </div>
+                  <p className="text-sm text-gray-600 leading-relaxed font-sans">
+                    {episode01Feature.description}
+                  </p>
+                </div>
+
+                <div className="pt-6 border-t border-gray-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+                  <div className="text-xs text-gray-600 flex items-center font-mono">
+                    <Lock className="w-3.5 h-3.5 mr-1.5 text-[#FF5A1F]" />
+                    <span>Closed-door recording at T-Hub, Hyderabad</span>
+                  </div>
+                  <Link
+                    to="/register"
+                    className="px-6 py-3.5 bg-[#FF5A1F] hover:bg-[#E04B14] text-white text-xs font-bold uppercase tracking-widest rounded-xs transition-colors shadow-md flex items-center justify-center space-x-2 shrink-0"
+                  >
+                    <span>REGISTER →</span>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -108,34 +133,89 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. SECTION — WHY IT'S DIFFERENT (Dark Charcoal Section) */}
-      <section className="py-20 lg:py-28 bg-[#14161A] text-[#E8E6E1] border-b border-[#2A2F3A]">
+      {/* 3. EVENT / EPISODE INFORMATION CARDS */}
+      <EventStrip />
+
+      {/* 4. THE FORMAT — ONE ROOM. TWO EXPERIENCES. */}
+      <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <span className="text-[10px] uppercase font-mono tracking-widest text-[#FF5A1F] block">
-              CORE PRINCIPLES
+          <div className="max-w-2xl space-y-3">
+            <span className="text-[10px] uppercase font-mono tracking-widest text-[#FF5A1F] block font-bold">
+              {theFormat.eyebrow}
             </span>
-            <h2 className="font-editorial-heading text-3xl sm:text-4xl font-bold text-[#E8E6E1]">
-              Why It's Different
+            <h2 className="font-editorial-heading text-3xl sm:text-5xl font-bold text-gray-900">
+              {theFormat.headline}
             </h2>
-            <p className="text-xs text-[#8A8F98] max-w-lg mx-auto">
-              Intentionally constructed to maximize tangible business value and strategic clarity.
+            <p className="text-xs text-gray-500 font-mono">
+              {theFormat.subhead}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {whyDifferent.map((card, idx) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {theFormat.experiences.map((exp) => (
+              <div
+                key={exp.number}
+                className="bg-gray-50 border border-gray-200 p-8 sm:p-10 rounded-xs space-y-6 hover:border-[#FF5A1F] transition-all shadow-xs group"
+              >
+                <div className="inline-flex items-center space-x-2 px-3 py-1 bg-[#FF5A1F]/10 text-[#FF5A1F] border border-[#FF5A1F]/30 rounded-xs text-xs font-mono font-bold">
+                  <Layers className="w-3.5 h-3.5" />
+                  <span>EXPERIENCE {exp.number}</span>
+                </div>
+                <h3 className="font-editorial-heading text-2xl font-bold text-gray-900 group-hover:text-[#FF5A1F] transition-colors">
+                  {exp.title}
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed font-sans">
+                  {exp.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. A CURATED ROOM, NOT A CROWDED ONE. */}
+      <section className="py-20 lg:py-28 bg-[#F8F9FA] text-[#111827] border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl space-y-6">
+            <span className="text-[11px] uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block">
+              {curatedRoomPositioning.eyebrow}
+            </span>
+            <h2 className="font-editorial-heading text-3xl sm:text-5xl font-bold text-gray-900 leading-tight">
+              {curatedRoomPositioning.headline}
+            </h2>
+            <div className="w-16 h-1 bg-[#FF5A1F] rounded-full" />
+            <p className="text-base sm:text-xl text-gray-700 leading-relaxed font-sans">
+              {curatedRoomPositioning.body}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. WHO IS IN THE ROOM? (THE PEOPLE WHO BUILD THE ECOSYSTEM) */}
+      <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="max-w-2xl space-y-3">
+            <span className="text-[10px] uppercase font-mono tracking-widest text-[#FF5A1F] block font-bold">
+              {whoIsInTheRoom.eyebrow}
+            </span>
+            <h2 className="font-editorial-heading text-3xl sm:text-4xl font-bold text-gray-900">
+              {whoIsInTheRoom.headline}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {whoIsInTheRoom.cards.map((card, idx) => (
               <div
                 key={idx}
-                className="bg-[#181C23] border border-[#2A2F3A] p-8 rounded-xs space-y-4 hover:border-[#FF5A1F]/50 transition-all duration-300 group"
+                className="bg-gray-50 border border-gray-200 p-6 rounded-xs space-y-3 hover:border-[#FF5A1F] transition-all shadow-xs"
               >
-                <div className="text-xs font-mono text-[#FF5A1F] font-bold">
+                <div className="w-7 h-7 rounded-xs bg-[#FF5A1F]/10 text-[#FF5A1F] font-mono font-bold text-xs flex items-center justify-center">
                   0{idx + 1}
                 </div>
-                <h3 className="font-editorial-heading text-xl font-bold text-[#E8E6E1] group-hover:text-[#FF5A1F] transition-colors">
+                <h3 className="font-editorial-heading text-lg font-bold text-gray-900">
                   {card.title}
                 </h3>
-                <p className="text-xs text-[#8A8F98] leading-relaxed">
+                <p className="text-xs text-gray-600 leading-relaxed">
                   {card.description}
                 </p>
               </div>
@@ -144,56 +224,107 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. FULL-WIDTH STATEMENT BAND */}
-      <StatementBand />
+      {/* 7. WHY IT'S DIFFERENT */}
+      <section className="py-20 lg:py-28 bg-[#F8F9FA] text-[#111827] border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="max-w-2xl space-y-3">
+            <span className="text-[11px] uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block">
+              CORE PRINCIPLES
+            </span>
+            <h2 className="font-editorial-heading text-3xl sm:text-4xl font-bold text-gray-900">
+              Why It's Different
+            </h2>
+          </div>
 
-      {/* 6. SECTION — THE LONG-TERM VISION (Light Warm White Section) */}
-      <section className="py-20 lg:py-28 bg-[#E8E6E1] text-[#14161A]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {whyDifferent.map((card) => (
+              <div
+                key={card.number}
+                className="bg-white border border-gray-200 p-8 rounded-xs space-y-4 hover:border-[#FF5A1F] transition-all shadow-xs"
+              >
+                <div className="text-xs font-mono font-bold text-[#FF5A1F]">
+                  {card.number}
+                </div>
+                <h3 className="font-editorial-heading text-xl font-bold text-gray-900">
+                  {card.title}
+                </h3>
+                <p className="text-xs text-gray-600 leading-relaxed font-sans">
+                  {card.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. THE LONG-TERM VISION */}
+      <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="max-w-3xl space-y-4">
-            <span className="text-[11px] uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block">
-              SUSTAINABLE FOUNDER ECOSYSTEM
+            <span className="text-[10px] uppercase font-mono tracking-widest text-[#FF5A1F] block font-bold">
+              {longTermVision.eyebrow}
             </span>
-            <h2 className="font-editorial-heading text-3xl sm:text-5xl font-bold text-[#14161A] leading-tight">
-              The Long-Term Vision
+            <h2 className="font-editorial-heading text-3xl sm:text-5xl font-bold text-gray-900">
+              {longTermVision.headline}
             </h2>
-            <p className="text-base sm:text-lg text-[#14161A]/85 leading-relaxed">
+            <p className="text-base text-gray-600 leading-relaxed">
               {longTermVision.body}
             </p>
           </div>
 
-          {/* Grid of Outcomes */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {longTermVision.outcomes.map((item, idx) => (
               <div
                 key={idx}
-                className="p-5 bg-white border border-[#D8D4CA] rounded-xs space-y-2 hover:border-[#FF5A1F] transition-all shadow-xs"
+                className="p-5 bg-gray-50 border border-gray-200 rounded-xs space-y-2 hover:border-[#FF5A1F] transition-all shadow-xs"
               >
                 <span className="text-[10px] font-mono text-[#FF5A1F] font-bold">
                   [ 0{idx + 1} ]
                 </span>
-                <h4 className="text-xs font-bold text-[#14161A] uppercase tracking-wider">
+                <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider">
                   {item}
                 </h4>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Closing Line Callout */}
-          <div className="pt-8 border-t border-[#D8D4CA] flex flex-col sm:flex-row items-center justify-between gap-6">
-            <p className="font-editorial-statement text-xl sm:text-2xl font-bold text-[#14161A]">
-              "{longTermVision.closingLine}"
-            </p>
-            <Link
-              to="/partner"
-              className="px-8 py-4 bg-[#FF5A1F] hover:bg-[#E04B14] text-[#14161A] text-xs font-bold uppercase tracking-widest rounded-xs transition-colors shadow-md shrink-0 flex items-center space-x-2"
-            >
-              <span>Explore Partnerships</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+      {/* 9. BUILD WITH THE ROOM — PARTNERSHIPS CTA */}
+      <section className="py-20 lg:py-28 bg-[#F8F9FA] text-[#111827]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white border border-gray-200 p-8 sm:p-12 lg:p-16 rounded-xs space-y-8 shadow-xl text-center">
+            <div className="max-w-2xl mx-auto space-y-4">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF5A1F] block font-bold">
+                {buildWithTheRoom.eyebrow}
+              </span>
+              <h2 className="font-editorial-heading text-3xl sm:text-5xl font-bold text-gray-900">
+                {buildWithTheRoom.headline}
+              </h2>
+              <p className="text-base text-gray-600 leading-relaxed">
+                {buildWithTheRoom.subhead}
+              </p>
+            </div>
+
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+              {buildWithTheRoom.buttons.map((btn, idx) => (
+                <Link
+                  key={idx}
+                  to={btn.href}
+                  className={`w-full sm:w-auto px-8 py-4 text-xs font-bold uppercase tracking-widest rounded-xs transition-all flex items-center justify-center space-x-2 ${
+                    idx === 0
+                      ? "bg-[#FF5A1F] hover:bg-[#E04B14] text-white shadow-md"
+                      : "bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-900"
+                  }`}
+                >
+                  <span>{btn.text}</span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
     </div>
   );
 };
+
