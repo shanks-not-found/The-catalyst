@@ -40,6 +40,12 @@ export const SITE_METADATA = {
     "The Catalyst Room is a curated business media and ecosystem platform bringing founders, investors, business leaders and ecosystem stakeholders together through meaningful conversations and connections.",
 };
 
+// ==========================================
+// HERO IMAGE CONFIGURATION
+// Change this URL to replace the hero image on the homepage
+// ==========================================
+export const HERO_IMAGE_URL = "/hero-image.jpg";
+
 export const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
@@ -47,6 +53,12 @@ export const NAV_ITEMS = [
   { label: "Episodes", href: "/episodes" },
   { label: "Speak With Us", href: "/contact" },
 ];
+
+// ==========================================
+// SECTION IMAGE CONFIGURATION
+// Change this URL to replace the image in "A ROOM BUILT FOR THE PEOPLE..." section
+// ==========================================
+export const SECTION_IMAGE_URL = "/section-image.jpg";
 
 export const HOME_CONTENT = {
   hero: {
@@ -112,7 +124,7 @@ export const HOME_CONTENT = {
   },
   curatedRoomPositioning: {
     eyebrow: "OUR POSITIONING",
-    headline: "A CURATED ROOM, NOT A CROWDED ONE.",
+    headline: "A ROOM BUILT FOR THE PEOPLE BUILDING WHAT’S NEXT.",
     body: "The Catalyst Room exists to move beyond noisy events and surface-level networking. We intentionally construct selective environments where relevance matters over volume, quality matters over crowd size, and meaningful business relationships replace transactional pitches.",
   },
   whoIsInTheRoom: {

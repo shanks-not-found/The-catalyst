@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Play, Lock, Layers, ArrowRight } from "lucide-react";
 import { SEOHead } from "../components/SEOHead";
 import { EventStrip } from "../components/EventStrip";
 import { ScrollReveal } from "../components/ScrollReveal";
-import { HOME_CONTENT } from "../data/content";
+import { HOME_CONTENT, HERO_IMAGE_URL, SECTION_IMAGE_URL } from "../data/content";
 
 export const Home: React.FC = () => {
   const {
@@ -17,6 +17,50 @@ export const Home: React.FC = () => {
     longTermVision,
     buildWithTheRoom,
   } = HOME_CONTENT;
+
+  // Scroll-based fade animation for hero image (tied to viewport entry/exit)
+  const [imageOpacity, setImageOpacity] = useState(1.0);
+  const [imageTransform, setImageTransform] = useState(0);
+
+  // Scroll-based fade animation for Section 5 image
+  const [sectionImageOpacity, setSectionImageOpacity] = useState(0);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const heroThreshold = 220; // Hero remains fully visible while viewing hero
+      const fadeDistance = 350; // Smoothly fades out as hero exits top of viewport
+
+      let opacity = 1.0;
+      if (scrollY > heroThreshold) {
+        const exitProgress = Math.min(1, (scrollY - heroThreshold) / fadeDistance);
+        opacity = 1.0 - exitProgress;
+      }
+
+      setImageOpacity(Math.max(0, opacity));
+      setImageTransform(Math.min(20, scrollY * 0.04));
+
+      // Section 5 image scroll observer
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        if (rect.top < windowHeight * 0.85 && rect.bottom > windowHeight * 0.15) {
+          setSectionImageOpacity(1.0);
+        } else if (rect.top >= windowHeight * 0.85) {
+          const progress = Math.max(0, (windowHeight - rect.top) / (windowHeight * 0.15));
+          setSectionImageOpacity(progress);
+        } else {
+          const progress = Math.max(0, rect.bottom / (windowHeight * 0.15));
+          setSectionImageOpacity(progress);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="w-full">
@@ -31,32 +75,57 @@ export const Home: React.FC = () => {
         <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:32px_32px] opacity-60 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl space-y-6">
-            {/* Headline */}
-            <h1 className="animate-hero-headline font-editorial-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#111827] leading-[1.08]">
-              {hero.headline}
-            </h1>
-
-            {/* Subheadline */}
-            <p className="animate-hero-subhead text-base sm:text-xl text-gray-600 font-sans leading-relaxed max-w-3xl font-normal">
-              {hero.subheadline}
-            </p>
-
-            {/* CTA Group */}
-            <div className="animate-hero-cta pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <Link
-                to="/register"
-                className="px-8 py-4 bg-[#FF5A1F] hover:bg-[#E04B14] text-white text-xs font-bold uppercase tracking-widest rounded-xs transition-all duration-200 hover:-translate-y-[1px] shadow-md hover:shadow-lg flex items-center justify-center space-x-2 group"
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left: Clearly Visible Editorial Photo with Soft Dissolving Outer Edges */}
+            <div className="lg:col-span-5 relative flex justify-center lg:justify-start order-2 lg:order-1">
+              <div
+                className="relative w-full max-w-md lg:max-w-none aspect-[4/3] pointer-events-none select-none"
+                style={{
+                  opacity: imageOpacity,
+                  transform: `translateY(${imageTransform}px)`,
+                  transition: "opacity 300ms ease-out, transform 300ms ease-out",
+                  maskImage:
+                    "radial-gradient(ellipse 85% 85% at 50% 50%, black 50%, rgba(0,0,0,0.85) 75%, transparent 98%)",
+                  WebkitMaskImage:
+                    "radial-gradient(ellipse 85% 85% at 50% 50%, black 50%, rgba(0,0,0,0.85) 75%, transparent 98%)",
+                }}
               >
-                <span>REGISTER</span>
-                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </Link>
-              <Link
-                to={hero.secondaryCta.href}
-                className="px-8 py-4 bg-[#FFF9F5] hover:bg-[#FFF2EB] border border-[#FF5A1F]/20 text-gray-900 text-xs font-bold uppercase tracking-widest rounded-xs transition-all duration-200 hover:-translate-y-[1px] flex items-center justify-center space-x-2 group"
-              >
-                <span>{hero.secondaryCta.text}</span>
-              </Link>
+                <img
+                  src={HERO_IMAGE_URL}
+                  alt="The Catalyst Room Business Conversation"
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+            </div>
+
+            {/* Right: Existing Hero Content */}
+            <div className="lg:col-span-7 space-y-6 order-1 lg:order-2">
+              {/* Headline */}
+              <h1 className="animate-hero-headline font-editorial-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#111827] leading-[1.08]">
+                {hero.headline}
+              </h1>
+
+              {/* Subheadline */}
+              <p className="animate-hero-subhead text-base sm:text-xl text-gray-600 font-sans leading-relaxed max-w-3xl font-normal">
+                {hero.subheadline}
+              </p>
+
+              {/* CTA Group */}
+              <div className="animate-hero-cta pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                <Link
+                  to="/register"
+                  className="px-8 py-4 bg-[#FF5A1F] hover:bg-[#E04B14] text-white text-xs font-bold uppercase tracking-widest rounded-xs transition-all duration-200 hover:-translate-y-[1px] shadow-md hover:shadow-lg flex items-center justify-center space-x-2 group"
+                >
+                  <span>REGISTER</span>
+                  <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  to={hero.secondaryCta.href}
+                  className="px-8 py-4 bg-[#FFF9F5] hover:bg-[#FFF2EB] border border-[#FF5A1F]/20 text-gray-900 text-xs font-bold uppercase tracking-widest rounded-xs transition-all duration-200 hover:-translate-y-[1px] flex items-center justify-center space-x-2 group"
+                >
+                  <span>{hero.secondaryCta.text}</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -190,20 +259,46 @@ export const Home: React.FC = () => {
       </section>
 
       {/* 5. A CURATED ROOM — WHITE SECTION */}
-      <section className="py-20 lg:py-28 bg-white text-[#111827]">
+      <section ref={sectionRef} className="py-20 lg:py-28 bg-white text-[#111827]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <div className="bg-[#FFF9F5] border border-[#FF5A1F]/20 p-8 sm:p-12 lg:p-16 rounded-xs space-y-6 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <span className="text-[11px] uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block">
-                {curatedRoomPositioning.eyebrow}
-              </span>
-              <h2 className="font-editorial-heading text-3xl sm:text-5xl font-bold text-gray-900 leading-tight">
-                {curatedRoomPositioning.headline}
-              </h2>
-              <div className="w-16 h-1 bg-[#FF5A1F] rounded-full" />
-              <p className="text-base sm:text-xl text-gray-700 leading-relaxed font-sans">
-                {curatedRoomPositioning.body}
-              </p>
+            <div className="bg-[#FFF9F5] border border-[#FF5A1F]/20 p-8 sm:p-12 lg:p-16 rounded-xs shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                {/* Left Side: Existing Text Content */}
+                <div className="lg:col-span-7 space-y-6">
+                  <span className="text-[11px] uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block">
+                    {curatedRoomPositioning.eyebrow}
+                  </span>
+                  <h2 className="font-editorial-heading text-3xl sm:text-5xl font-bold text-gray-900 leading-tight">
+                    {curatedRoomPositioning.headline}
+                  </h2>
+                  <div className="w-16 h-1 bg-[#FF5A1F] rounded-full" />
+                  <p className="text-base sm:text-xl text-gray-700 leading-relaxed font-sans">
+                    {curatedRoomPositioning.body}
+                  </p>
+                </div>
+
+                {/* Right Side: Clearly Visible Editorial Image with Soft Feathered Edges */}
+                <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
+                  <div
+                    className="relative w-full max-w-md lg:max-w-none aspect-[4/3] pointer-events-none select-none"
+                    style={{
+                      opacity: sectionImageOpacity,
+                      transition: "opacity 400ms ease-out",
+                      maskImage:
+                        "radial-gradient(ellipse 85% 85% at 50% 50%, black 50%, rgba(0,0,0,0.85) 75%, transparent 98%)",
+                      WebkitMaskImage:
+                        "radial-gradient(ellipse 85% 85% at 50% 50%, black 50%, rgba(0,0,0,0.85) 75%, transparent 98%)",
+                    }}
+                  >
+                    <img
+                      src={SECTION_IMAGE_URL}
+                      alt="Curated Business Room Conversation"
+                      className="w-full h-full object-cover object-center"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </ScrollReveal>
         </div>
