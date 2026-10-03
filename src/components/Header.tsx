@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight, Sparkles } from "lucide-react";
-import { NAV_ITEMS } from "../data/content";
+import { NAV_ITEMS, SITE_METADATA } from "../data/content";
+import { InstagramIcon } from "./SocialIcons";
 
 
 export const Header: React.FC = () => {
@@ -137,8 +138,24 @@ export const Header: React.FC = () => {
             })}
           </nav>
 
-          {/* Mobile Registration Button */}
-          <div className="pt-6 border-t border-gray-200">
+          {/* Mobile Footer & Official Instagram Channel */}
+          <div className="pt-6 border-t border-gray-200 space-y-4">
+            <a
+              href={SITE_METADATA.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-3 bg-[#FFF9F5] border border-[#FF5A1F]/20 rounded-xs text-gray-800 hover:border-[#FF5A1F] transition-colors group"
+              aria-label="Instagram"
+            >
+              <div className="flex items-center space-x-2.5">
+                <div className="p-1.5 bg-pink-600/10 text-pink-600 rounded-xs">
+                  <InstagramIcon className="w-4 h-4" />
+                </div>
+                <span className="text-xs font-mono font-semibold">@thecatalyst_tech</span>
+              </div>
+              <span className="text-[10px] font-mono text-[#FF5A1F] font-bold uppercase">FOLLOW →</span>
+            </a>
+
             <Link
               to="/register"
               onClick={() => setIsMobileMenuOpen(false)}

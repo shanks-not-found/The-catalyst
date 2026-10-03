@@ -69,9 +69,16 @@ export const Footer: React.FC = () => {
                   <span className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-gray-300 text-gray-600 cursor-not-allowed hover:border-[#FF5A1F]/40 transition-colors" title="YouTube - Coming Soon">
                     <YoutubeIcon className="w-4 h-4" />
                   </span>
-                  <span className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-gray-300 text-gray-600 cursor-not-allowed hover:border-[#FF5A1F]/40 transition-colors" title="Instagram - Coming Soon">
+                  <a
+                    href={SITE_METADATA.instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-gray-300 text-gray-700 hover:text-white hover:bg-[#FF5A1F] hover:border-[#FF5A1F] transition-all duration-200 shadow-xs hover:shadow-md hover:scale-105"
+                    title="Follow The Catalyst Room on Instagram (@thecatalyst_tech)"
+                    aria-label="The Catalyst Room on Instagram"
+                  >
                     <InstagramIcon className="w-4 h-4" />
-                  </span>
+                  </a>
                   <span className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-gray-300 text-gray-600 cursor-not-allowed hover:border-[#FF5A1F]/40 transition-colors" title="LinkedIn - Coming Soon">
                     <LinkedinIcon className="w-4 h-4" />
                   </span>

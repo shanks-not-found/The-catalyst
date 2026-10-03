@@ -179,26 +179,36 @@ export const Episodes: React.FC = () => {
             </div>
 
             {/* Instagram */}
-            <div className="bg-[#FFF9F5] border border-[#FF5A1F]/20 p-6 sm:p-8 rounded-xs space-y-4 hover:border-[#FF5A1F] hover:-translate-y-1 transition-all duration-300 shadow-xs hover:shadow-md flex flex-col justify-between h-full">
+            <a
+              href="https://www.instagram.com/thecatalyst_tech?stkn=eXl5cWtsMzc2NWFw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#FFF9F5] border border-[#FF5A1F]/20 p-6 sm:p-8 rounded-xs space-y-4 hover:border-[#FF5A1F] hover:-translate-y-1 transition-all duration-300 shadow-xs hover:shadow-md flex flex-col justify-between h-full group"
+              title="Follow The Catalyst Room on Instagram (@thecatalyst_tech)"
+            >
               <div className="space-y-4">
-                <div className="w-10 h-10 rounded-full bg-pink-600/10 text-pink-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-pink-600/10 text-pink-600 flex items-center justify-center transition-transform group-hover:scale-110">
                   <InstagramIcon className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-editorial-heading text-xl font-bold text-gray-900">
-                    Instagram
+                  <h3 className="font-editorial-heading text-xl font-bold text-gray-900 group-hover:text-[#FF5A1F] transition-colors flex items-center justify-between">
+                    <span>Instagram</span>
+                    <span className="text-xs font-mono text-[#FF5A1F] opacity-0 group-hover:opacity-100 transition-opacity">→</span>
                   </h3>
                   <p className="text-xs font-semibold text-[#FF5A1F] mt-0.5">
                     {followSeries.channels[1].description}
                   </p>
                 </div>
               </div>
-              <div className="pt-4 border-t border-gray-200/60">
-                <span className="px-3 py-1 bg-white border border-gray-200 text-[10px] font-mono font-bold text-gray-800 uppercase rounded-xs">
-                  {followSeries.channels[1].status}
+              <div className="pt-4 border-t border-gray-200/60 flex items-center justify-between">
+                <span className="px-3 py-1 bg-[#FF5A1F] text-white text-[10px] font-mono font-bold uppercase rounded-xs transition-colors group-hover:bg-[#E04B14]">
+                  FOLLOW ON INSTAGRAM →
+                </span>
+                <span className="text-[11px] font-mono text-gray-500 group-hover:text-[#FF5A1F] transition-colors">
+                  @thecatalyst_tech
                 </span>
               </div>
-            </div>
+            </a>
 
             {/* LinkedIn */}
             <div className="bg-[#FFF9F5] border border-[#FF5A1F]/20 p-6 sm:p-8 rounded-xs space-y-4 hover:border-[#FF5A1F] hover:-translate-y-1 transition-all duration-300 shadow-xs hover:shadow-md flex flex-col justify-between h-full">

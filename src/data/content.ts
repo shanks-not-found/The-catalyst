@@ -30,12 +30,21 @@ export interface Episode {
   brandText: string;
 }
 
+export const INSTAGRAM_URL = "https://www.instagram.com/thecatalyst_tech?stkn=eXl5cWtsMzc2NWFw";
+
+export const SOCIAL_LINKS = {
+  instagram: INSTAGRAM_URL,
+  youtube: "",
+  linkedin: "",
+};
+
 export const SITE_METADATA = {
   title: "The Catalyst Room",
   tagline: "Where Conversations Create Momentum",
   domain: "catalyst.tech",
   location: "Hyderabad, India",
   copyrightYear: 2026,
+  instagramUrl: INSTAGRAM_URL,
   footerDescription:
     "The Catalyst Room is a curated business media and ecosystem platform bringing founders, investors, business leaders and ecosystem stakeholders together through meaningful conversations and connections.",
 };
@@ -737,7 +746,8 @@ export const EPISODES_CONTENT = {
       {
         name: "Instagram",
         description: "Clips, moments & highlights",
-        status: "COMING SOON",
+        status: "FOLLOW NOW",
+        url: INSTAGRAM_URL,
       },
       {
         name: "LinkedIn",
