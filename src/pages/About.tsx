@@ -83,8 +83,8 @@ export const About: React.FC = () => {
             className="w-full h-full object-cover object-center"
             loading="eager"
           />
-          {/* Subtle editorial gradient overlay ensuring strong text contrast while keeping photo visible */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/40" />
+          {/* Subtle editorial gradient overlay ensuring text readability while keeping photo clear and vibrant */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/40 to-transparent" />
         </div>
 
         {/* Text content positioned above background image */}
@@ -103,8 +103,8 @@ export const About: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. WHAT IS THE CATALYST ROOM? */}
-      <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
+      {/* 2. WHAT IS THE CATALYST ROOM? (SUBTLE SOFT GRAY #F7F7F7) */}
+      <section className="py-20 lg:py-28 bg-[#F7F7F7] text-[#111827] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <ScrollReveal>
             <div className="max-w-3xl space-y-4">
@@ -142,7 +142,7 @@ export const About: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. ONE PLATFORM. TWO EXPERIENCES. */}
+      {/* 3. ONE PLATFORM. TWO EXPERIENCES. (WHITE) */}
       <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <ScrollReveal>
@@ -180,8 +180,8 @@ export const About: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. WHO BELONGS IN THE ROOM? */}
-      <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
+      {/* 4. WHO BELONGS IN THE ROOM? (SUBTLE SOFT GRAY #F7F7F7) */}
+      <section className="py-20 lg:py-28 bg-[#F7F7F7] text-[#111827] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <ScrollReveal>
             <div className="max-w-2xl space-y-3">
@@ -214,7 +214,7 @@ export const About: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. WHY THE ROOM EXISTS */}
+      {/* 5. WHY THE ROOM EXISTS (WHITE) */}
       <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <ScrollReveal>
@@ -251,8 +251,8 @@ export const About: React.FC = () => {
         </div>
       </section>
 
-      {/* 6. BUILT BEYOND A SINGLE EPISODE. */}
-      <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
+      {/* 6. BUILT BEYOND A SINGLE EPISODE. (SUBTLE SOFT GRAY #F7F7F7) */}
+      <section className="py-20 lg:py-28 bg-[#F7F7F7] text-[#111827] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <ScrollReveal>
             <div className="max-w-3xl space-y-4">

@@ -84,8 +84,8 @@ export const Partner: React.FC = () => {
             className="w-full h-full object-cover object-center lg:object-[center_35%]"
             loading="eager"
           />
-          {/* Subtle editorial gradient overlay ensuring strong text contrast while keeping photograph visible */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/40" />
+          {/* Subtle editorial gradient overlay ensuring text readability while keeping photograph clear and vibrant */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/40 to-transparent" />
         </div>
 
         {/* Content Layer above background image */}
@@ -236,8 +236,8 @@ export const Partner: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. SPONSORSHIP OPPORTUNITIES */}
-      <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200" id="sponsorship-opportunities">
+      {/* 3. SPONSORSHIP OPPORTUNITIES (SUBTLE SOFT GRAY #F7F7F7) */}
+      <section className="py-20 lg:py-28 bg-[#F7F7F7] text-[#111827] border-b border-gray-200" id="sponsorship-opportunities">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="max-w-3xl space-y-3">
             <span className="text-[10px] uppercase font-mono tracking-widest text-[#FF5A1F] block font-bold">
@@ -255,7 +255,7 @@ export const Partner: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. WHAT PARTNERS RECEIVE */}
+      {/* 4. WHAT PARTNERS RECEIVE (WHITE) */}
       <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="max-w-3xl space-y-3">
@@ -293,14 +293,14 @@ export const Partner: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. STRATEGIC PARTNERSHIPS */}
-      <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
+      {/* 5. STRATEGIC PARTNERSHIPS (SUBTLE SOFT GRAY #F7F7F7) */}
+      <section className="py-20 lg:py-28 bg-[#F7F7F7] text-[#111827] border-b border-gray-200" id="strategic-partnerships">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <InKindPartnerTable />
         </div>
       </section>
 
-      {/* 6. BUILD FROM THE BEGINNING */}
+      {/* 6. BUILD FROM THE BEGINNING (WHITE) */}
       <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="max-w-3xl space-y-4">
@@ -336,8 +336,8 @@ export const Partner: React.FC = () => {
         </div>
       </section>
 
-      {/* 7. FINAL PARTNER CTA */}
-      <section className="py-20 lg:py-28 bg-white text-[#111827]">
+      {/* 7. FINAL PARTNER CTA (SUBTLE SOFT GRAY #F7F7F7) */}
+      <section className="py-20 lg:py-28 bg-[#F7F7F7] text-[#111827]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-[#FFF9F5] border border-[#FF5A1F]/25 p-8 sm:p-12 lg:p-16 rounded-xs space-y-8 shadow-xl text-center">
             <div className="max-w-2xl mx-auto space-y-4">

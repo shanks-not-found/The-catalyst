@@ -110,8 +110,8 @@ export const Home: React.FC = () => {
             className="w-full h-full object-cover object-center"
             loading="eager"
           />
-          {/* Subtle editorial gradient overlay ensuring strong text contrast while keeping photo visible */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/40" />
+          {/* Subtle editorial gradient overlay ensuring text readability while keeping photo clear and vibrant */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/40 to-transparent" />
         </div>
 
         {/* Hero Content Layer */}
