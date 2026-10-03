@@ -202,7 +202,7 @@ export const HOME_CONTENT = {
     subhead:
       "We’re partnering with brands, businesses and ecosystem organisations that want to be part of the conversations shaping the next generation of companies.",
     buttons: [
-      { text: "BECOME A PARTNER →", href: "/contact" },
+      { text: "BECOME A PARTNER →", href: "/register" },
       { text: "VIEW PARTNERSHIP OPTIONS →", href: "/partner" },
     ],
   },
@@ -444,7 +444,7 @@ export const PARTNER_CONTENT = {
     subhead:
       "We’re partnering with brands, businesses and ecosystem organisations that want to be part of the conversations shaping the next generation of companies.",
     buttons: [
-      { text: "BECOME A PARTNER →", href: "/contact" },
+      { text: "BECOME A PARTNER →", href: "/register" },
       { text: "VIEW PARTNERSHIP OPTIONS →", href: "#two-ways-to-partner" },
     ],
   },
@@ -654,7 +654,7 @@ export const PARTNER_CONTENT = {
     subhead:
       "Tell us what you can bring to the room, and we’ll explore the right partnership structure.",
     buttons: [
-      { text: "BECOME A PARTNER →", href: "/contact" },
+      { text: "BECOME A PARTNER →", href: "/register" },
       { text: "DISCUSS SPONSORSHIP →", href: "/contact" },
     ],
   },

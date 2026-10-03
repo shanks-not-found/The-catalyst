@@ -56,7 +56,7 @@ export const InKindPartnerTable: React.FC = () => {
           Opportunities are subject to relevance, availability and mutual fit.
         </p>
         <Link
-          to="/contact"
+          to="/register"
           className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white bg-[#FF5A1F] hover:bg-[#E04B14] rounded-xs transition-all shadow-md group shrink-0"
         >
           <span>BECOME A STRATEGIC PARTNER</span>

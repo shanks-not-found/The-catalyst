@@ -102,7 +102,7 @@ export const Partner: React.FC = () => {
             </p>
             <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <Link
-                to="/contact"
+                to="/register"
                 className="px-8 py-4 bg-[#FF5A1F] hover:bg-[#E04B14] text-white text-xs font-bold uppercase tracking-widest rounded-xs transition-all duration-200 hover:-translate-y-[1px] shadow-md hover:shadow-lg flex items-center justify-center space-x-2 group"
               >
                 <span>BECOME A PARTNER</span>
