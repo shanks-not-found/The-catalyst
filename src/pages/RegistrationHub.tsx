@@ -3,6 +3,7 @@ import { Handshake, UserCheck, Rocket, ExternalLink } from "lucide-react";
 import { SEOHead } from "../components/SEOHead";
 import { GOOGLE_FORM_LINKS } from "../data/formsConfig";
 import { ScrollReveal } from "../components/ScrollReveal";
+import { CinematicSection } from "../components/CinematicSection";
 
 export const RegistrationHub: React.FC = () => {
   const handleOpenForm = (url: string, title: string) => {
@@ -22,8 +23,18 @@ export const RegistrationHub: React.FC = () => {
         description="Choose how you want to be part of the room. Register as Partner, Guest, or Founder."
       />
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-16 lg:pt-40 lg:pb-20 bg-white text-[#111827] border-b border-gray-200 text-center">
+      {/* Hero Section (White with scroll-responsive zoom image) */}
+      <CinematicSection
+        isFirstSection={true}
+        priority={true}
+        bgImage="/about-section.jpg"
+        bgImageAlt="Register with The Catalyst Room"
+        bgOverlay={
+          <div className="absolute inset-0 bg-gradient-to-b from-white/92 via-white/70 to-white/95" />
+        }
+        theme="white"
+        className="border-b border-gray-200 text-center"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto space-y-4">
             <span className="text-xs uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block animate-hero-eyebrow">
@@ -37,7 +48,7 @@ export const RegistrationHub: React.FC = () => {
             </p>
           </div>
         </div>
-      </section>
+      </CinematicSection>
 
       {/* 3 Registration Blocks in Inverted Triangle Layout (Subtle Soft Gray #F7F7F7) */}
       <section className="py-20 lg:py-28 bg-[#F7F7F7] text-[#111827]">

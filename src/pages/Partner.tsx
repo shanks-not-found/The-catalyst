@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import { SEOHead } from "../components/SEOHead";
+import { CinematicSection } from "../components/CinematicSection";
 import { PartnershipTable } from "../components/PartnershipTable";
 import { InKindPartnerTable } from "../components/InKindPartnerTable";
 import { PARTNER_CONTENT } from "../data/content";
@@ -23,33 +24,6 @@ export const Partner: React.FC = () => {
     finalCta,
   } = PARTNER_CONTENT;
 
-  // Viewport entry/exit detection for smooth fade + subtle zoom (1.04 -> 1.00)
-  const [isInView, setIsInView] = useState(true);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting);
-      },
-      {
-        threshold: 0.1,
-        rootMargin: "0px",
-      }
-    );
-
-    const currentRef = sectionRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, []);
-
   // Renders the configured URL, falling back to local handshake photograph if placeholder is set
   const resolvedImageSrc =
     PARTNER_SECTION_IMAGE_URL && PARTNER_SECTION_IMAGE_URL !== "PASTE_IMAGE_URL_HERE"
@@ -64,32 +38,19 @@ export const Partner: React.FC = () => {
       />
 
       {/* 1. PARTNER WITH THE ROOM WITH FULL-BLOCK BACKGROUND IMAGE */}
-      <section
-        ref={sectionRef}
-        className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-white text-[#111827] border-b border-gray-200 overflow-hidden"
-      >
-        {/* Full-width background image layer with scroll-triggered fade + subtle zoom */}
-        <div
-          className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden"
-          style={{
-            opacity: isInView ? 1 : 0,
-            transform: isInView ? "scale(1.00)" : "scale(1.04)",
-            transition: "opacity 1000ms ease-out, transform 1000ms ease-out",
-            willChange: "opacity, transform",
-          }}
-        >
-          <img
-            src={resolvedImageSrc}
-            alt="Partner With The Room — The Catalyst Room"
-            className="w-full h-full object-cover object-center lg:object-[center_35%]"
-            loading="eager"
-          />
-          {/* Subtle editorial gradient overlay ensuring text readability while keeping photograph clear and vibrant */}
+      <CinematicSection
+        isFirstSection={true}
+        priority={true}
+        bgImage={resolvedImageSrc}
+        bgImageAlt="Partner With The Room — The Catalyst Room"
+        bgPosition="object-cover object-center lg:object-[center_35%]"
+        bgOverlay={
           <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/40 to-transparent" />
-        </div>
-
-        {/* Content Layer above background image */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        }
+        theme="white"
+        className="border-b border-gray-200"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl space-y-6">
             <span className="text-xs uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block animate-hero-eyebrow">
               {partnerWithTheRoom.eyebrow}
@@ -118,11 +79,11 @@ export const Partner: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </CinematicSection>
 
-      {/* 2. BUILD WITH THE ROOM */}
-      <section className="py-20 lg:py-28 bg-[#F7F7F7] text-[#111827] border-b border-gray-200 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* 2. BUILD WITH THE ROOM (SUBTLE SOFT GRAY #F7F7F7) */}
+      <CinematicSection theme="gray" id="build-with-the-room">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl space-y-6">
             <span className="text-xs uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block">
               {hero.eyebrow}
@@ -144,11 +105,11 @@ export const Partner: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </CinematicSection>
 
-      {/* 2. TWO WAYS TO PARTNER */}
-      <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200" id="two-ways-to-partner">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      {/* 3. TWO WAYS TO PARTNER (WHITE) */}
+      <CinematicSection theme="white" id="two-ways-to-partner">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 lg:space-y-12">
           <div className="max-w-3xl space-y-4">
             <span className="text-[11px] uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block">
               PARTNERSHIP ARCHITECTURE
@@ -234,10 +195,10 @@ export const Partner: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>
+      </CinematicSection>
 
-      {/* 3. SPONSORSHIP OPPORTUNITIES (SUBTLE SOFT GRAY #F7F7F7) */}
-      <section className="py-20 lg:py-28 bg-[#F7F7F7] text-[#111827] border-b border-gray-200" id="sponsorship-opportunities">
+      {/* 4. SPONSORSHIP OPPORTUNITIES (SUBTLE SOFT GRAY #F7F7F7) */}
+      <CinematicSection theme="gray" id="sponsorship-opportunities">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="max-w-3xl space-y-3">
             <span className="text-[10px] uppercase font-mono tracking-widest text-[#FF5A1F] block font-bold">
@@ -253,11 +214,11 @@ export const Partner: React.FC = () => {
 
           <PartnershipTable />
         </div>
-      </section>
+      </CinematicSection>
 
-      {/* 4. WHAT PARTNERS RECEIVE (WHITE) */}
-      <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      {/* 5. WHAT PARTNERS RECEIVE (WHITE) */}
+      <CinematicSection theme="white" id="what-partners-receive">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 lg:space-y-12">
           <div className="max-w-3xl space-y-3">
             <span className="text-[11px] uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block">
               VALUE DELIVERED
@@ -291,18 +252,18 @@ export const Partner: React.FC = () => {
             <span>{whatPartnersReceive.qualifier}</span>
           </div>
         </div>
-      </section>
+      </CinematicSection>
 
-      {/* 5. STRATEGIC PARTNERSHIPS (SUBTLE SOFT GRAY #F7F7F7) */}
-      <section className="py-20 lg:py-28 bg-[#F7F7F7] text-[#111827] border-b border-gray-200" id="strategic-partnerships">
+      {/* 6. STRATEGIC PARTNERSHIPS (SUBTLE SOFT GRAY #F7F7F7) */}
+      <CinematicSection theme="gray" id="strategic-partnerships">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <InKindPartnerTable />
         </div>
-      </section>
+      </CinematicSection>
 
-      {/* 6. BUILD FROM THE BEGINNING (WHITE) */}
-      <section className="py-20 lg:py-28 bg-white text-[#111827] border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      {/* 7. BUILD FROM THE BEGINNING (WHITE) */}
+      <CinematicSection theme="white" id="partner-principles">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 lg:space-y-12">
           <div className="max-w-3xl space-y-4">
             <span className="text-[10px] uppercase font-mono tracking-widest text-[#FF5A1F] block font-bold">
               PARTNER ECOSYSTEM PRINCIPLES
@@ -334,10 +295,10 @@ export const Partner: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>
+      </CinematicSection>
 
-      {/* 7. FINAL PARTNER CTA (SUBTLE SOFT GRAY #F7F7F7) */}
-      <section className="py-20 lg:py-28 bg-[#F7F7F7] text-[#111827]">
+      {/* 8. FINAL PARTNER CTA (SUBTLE SOFT GRAY #F7F7F7) */}
+      <CinematicSection theme="gray" id="start-conversation">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-[#FFF9F5] border border-[#FF5A1F]/25 p-8 sm:p-12 lg:p-16 rounded-xs space-y-8 shadow-xl text-center">
             <div className="max-w-2xl mx-auto space-y-4">
@@ -362,7 +323,7 @@ export const Partner: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </CinematicSection>
     </div>
   );
 };

@@ -15,9 +15,9 @@ export function App() {
     <Router>
       <PageLoader />
       <ScrollProgress />
-      <div className="min-h-screen flex flex-col bg-white text-[#111827] antialiased">
+      <div className="min-h-screen flex flex-col bg-white text-[#111827] antialiased w-full max-w-full overflow-x-hidden">
         <Header />
-        <main className="flex-grow">
+        <main className="flex-grow w-full max-w-full overflow-x-hidden">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

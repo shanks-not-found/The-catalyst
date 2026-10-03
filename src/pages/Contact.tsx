@@ -2,6 +2,7 @@ import React from "react";
 import { SEOHead } from "../components/SEOHead";
 import { ContactForm } from "../components/ContactForm";
 import { ScrollReveal } from "../components/ScrollReveal";
+import { CinematicSection } from "../components/CinematicSection";
 import { CONTACT_CONTENT } from "../data/content";
 
 export const Contact: React.FC = () => {
@@ -14,8 +15,18 @@ export const Contact: React.FC = () => {
         description="Whether you're a founder, investor, business leader, ecosystem partner, brand or creator, we'd love to hear from you."
       />
 
-      {/* Hero Section (White) */}
-      <section className="relative pt-32 pb-16 lg:pt-40 lg:pb-20 bg-white text-[#111827]">
+      {/* Hero Section (White with scroll-responsive zoom image) */}
+      <CinematicSection
+        isFirstSection={true}
+        priority={true}
+        bgImage="/section-image.jpg"
+        bgImageAlt="Contact The Catalyst Room"
+        bgOverlay={
+          <div className="absolute inset-0 bg-gradient-to-b from-white/92 via-white/70 to-white/95" />
+        }
+        theme="white"
+        className="border-b border-gray-200"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-3xl mx-auto space-y-4">
             <span className="text-xs uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block animate-hero-eyebrow">
@@ -29,7 +40,7 @@ export const Contact: React.FC = () => {
             </p>
           </div>
         </div>
-      </section>
+      </CinematicSection>
 
       {/* Single Focused Inquiry Form Section (Subtle Soft Gray #F7F7F7) */}
       <section className="py-20 lg:py-28 bg-[#F7F7F7] text-[#111827]">

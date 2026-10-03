@@ -27,12 +27,15 @@ export const Header: React.FC = () => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "";
     }
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isMobileMenuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full max-w-full transition-all duration-300 pointer-events-none">
       <div
         className={`pointer-events-auto transition-all duration-300 ${
           isScrolled

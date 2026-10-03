@@ -12,7 +12,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   children,
   className = "",
   delay = 0,
-  threshold = 0.15,
+  threshold = 0.05,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -37,7 +37,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
       },
       {
         threshold,
-        rootMargin: "0px 0px -50px 0px",
+        rootMargin: "100px 0px -20px 0px",
       }
     );
 
