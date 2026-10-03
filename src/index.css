@@ -28,7 +28,6 @@ html {
   font-family: var(--font-sans);
   background-color: #FFFFFF;
   color: #111827;
-  scroll-behavior: smooth;
   overflow-x: hidden;
   max-width: 100%;
   width: 100%;

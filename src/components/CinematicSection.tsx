@@ -31,7 +31,7 @@ export const CinematicSection: React.FC<CinematicSectionProps> = ({
   const imageRef = useRef<HTMLImageElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Subsequent sections visibility tracking
+  // Entrance visibility state for subsequent sections
   const [isVisible, setIsVisible] = useState(isFirstSection);
 
   const getThemeClass = (t: string) => {
@@ -48,10 +48,8 @@ export const CinematicSection: React.FC<CinematicSectionProps> = ({
     }
   };
 
-  // 1. SCROLL-RESPONSIVE ZOOM IN & ZOOM OUT FOR OPENING HERO SECTION
+  // 1. SCROLL-LINKED COORDINATED MOTION (HERO ZOOM + SUBTLE LAYERED DEPTH)
   useEffect(() => {
-    if (!isFirstSection) return;
-
     // Check prefers-reduced-motion
     const reducedMotion =
       typeof window !== "undefined" &&
@@ -62,123 +60,135 @@ export const CinematicSection: React.FC<CinematicSectionProps> = ({
         imageRef.current.style.transform = "scale(1)";
         imageRef.current.style.opacity = "1";
       }
+      if (contentRef.current) {
+        contentRef.current.style.transform = "none";
+        contentRef.current.style.opacity = "1";
+      }
       return;
     }
 
     let animationFrameId: number;
+    let isIntersectingViewport = isFirstSection;
 
-    const handleScroll = () => {
-      if (!sectionRef.current || !imageRef.current) return;
-
-      const scrollY = window.scrollY || window.pageYOffset || 0;
-      const sectionHeight = sectionRef.current.offsetHeight || window.innerHeight || 800;
-
-      // Normalized scroll progress through the hero section: 0 -> 1
-      const progress = Math.min(1, Math.max(0, scrollY / sectionHeight));
-
-      let scale = 1.0;
-      let imgOpacity = 1.0;
-
-      if (progress <= 0.5) {
-        // Phase 1: Scrolling down through the first half -> smoothly zoom in 1.00 -> 1.08
-        const u = progress / 0.5; // 0 -> 1
-        // Smooth cubic ease out
-        const easeIn = 1 - Math.pow(1 - u, 3);
-        scale = 1.0 + 0.08 * easeIn;
-      } else {
-        // Phase 2: As opening section moves out of view -> smoothly transition back toward normal scale (1.08 -> 1.01)
-        const v = (progress - 0.5) / 0.5; // 0 -> 1
-        // Smooth quadratic ease
-        const easeOut = v * (2 - v);
-        scale = 1.08 - 0.07 * easeOut;
-      }
-
-      // Smooth subtle opacity fade as the section leaves the viewport
-      if (progress > 0.65) {
-        imgOpacity = Math.max(0.1, 1 - (progress - 0.65) / 0.35);
-      } else {
-        imgOpacity = 1.0;
-      }
-
-      // Apply transform to image layer (isolated from text and controls)
-      imageRef.current.style.transform = `scale(${scale.toFixed(4)})`;
-      imageRef.current.style.opacity = `${imgOpacity.toFixed(3)}`;
-
-      // Hero content stays 100% stable while in view; gently glides and fades when scrolling out
-      if (contentRef.current) {
-        if (progress > 0.45) {
-          const fadeProgress = (progress - 0.45) / 0.55;
-          const textOpacity = Math.max(0, 1 - fadeProgress * 1.2);
-          const textOffset = -fadeProgress * 24;
-          contentRef.current.style.opacity = `${textOpacity.toFixed(3)}`;
-          contentRef.current.style.transform = `translate3d(0, ${textOffset.toFixed(1)}px, 0)`;
-        } else {
-          contentRef.current.style.opacity = "1";
-          contentRef.current.style.transform = "translate3d(0, 0, 0)";
-        }
-      }
-    };
-
-    const onScroll = () => {
-      cancelAnimationFrame(animationFrameId);
-      animationFrameId = requestAnimationFrame(handleScroll);
-    };
-
-    // Run once initially to sync state
-    handleScroll();
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [isFirstSection]);
-
-  // 2. SMOOTH GRADUAL ENTRANCE & EXIT FOR SUBSEQUENT SECTIONS
-  useEffect(() => {
-    if (isFirstSection) {
-      setIsVisible(true);
-      return;
-    }
-
-    const section = sectionRef.current;
-    if (!section) return;
-
-    // Accessibility: Respect reduced motion settings
-    if (
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      setIsVisible(true);
-      return;
-    }
-
-    // Trigger reveal 160px before entering bottom of viewport so user visibly sees the animation unfolding with zero empty gaps
-    const observer = new IntersectionObserver(
+    // Intersection observer to pause calculations when section is offscreen
+    const viewportObserver = new IntersectionObserver(
       ([entry]) => {
+        isIntersectingViewport = entry.isIntersecting;
         if (entry.isIntersecting) {
           setIsVisible(true);
         } else {
-          // If the section has scrolled back completely below the viewport, reset for re-reveal on scroll down
+          // If scrolled completely below, reset for clean re-entrance
           const vh = window.innerHeight || 800;
-          if (entry.boundingClientRect.top > vh + 80) {
+          if (entry.boundingClientRect.top > vh + 100) {
             setIsVisible(false);
           }
         }
       },
       {
         threshold: 0,
-        rootMargin: "160px 0px -40px 0px",
+        rootMargin: "200px 0px 200px 0px",
       }
     );
 
-    observer.observe(section);
+    if (sectionRef.current) {
+      viewportObserver.observe(sectionRef.current);
+    }
+
+    const updateMotion = () => {
+      if (!sectionRef.current || !isIntersectingViewport) return;
+
+      const rect = sectionRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || 800;
+
+      if (isFirstSection) {
+        // --- OPENING HERO SECTION LOGIC ---
+        const scrollY = window.scrollY || window.pageYOffset || 0;
+        const sectionHeight = sectionRef.current.offsetHeight || viewportHeight;
+        const progress = Math.min(1, Math.max(0, scrollY / sectionHeight));
+
+        let scale = 1.0;
+        let imgOpacity = 1.0;
+
+        if (progress <= 0.5) {
+          // Phase 1: Scroll down through first half -> smooth zoom in (1.000 -> 1.075)
+          const u = progress / 0.5;
+          const easeIn = 1 - Math.pow(1 - u, 3);
+          scale = 1.0 + 0.075 * easeIn;
+        } else {
+          // Phase 2: As opening section exits -> ease back toward normal scale (1.075 -> 1.010)
+          const v = (progress - 0.5) / 0.5;
+          const easeOut = v * (2 - v);
+          scale = 1.075 - 0.065 * easeOut;
+        }
+
+        // Soft opacity dissolve as section leaves viewport
+        if (progress > 0.65) {
+          imgOpacity = Math.max(0.12, 1 - (progress - 0.65) / 0.35);
+        }
+
+        // Restrained subtle downward parallax for the background image
+        const imgParallaxY = scrollY * 0.12;
+
+        if (imageRef.current) {
+          imageRef.current.style.transform = `translate3d(0, ${imgParallaxY.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`;
+          imageRef.current.style.opacity = `${imgOpacity.toFixed(3)}`;
+        }
+
+        // Hero content: stays stable while reading; glides slightly and fades when scrolling out
+        if (contentRef.current) {
+          if (progress > 0.40) {
+            const fadeProgress = (progress - 0.40) / 0.60;
+            const textOpacity = Math.max(0, 1 - fadeProgress * 1.15);
+            const textOffset = -fadeProgress * 24;
+            contentRef.current.style.opacity = `${textOpacity.toFixed(3)}`;
+            contentRef.current.style.transform = `translate3d(0, ${textOffset.toFixed(1)}px, 0)`;
+          } else {
+            contentRef.current.style.opacity = "1";
+            contentRef.current.style.transform = "translate3d(0, 0, 0)";
+          }
+        }
+      } else {
+        // --- SUBSEQUENT SECTIONS LAYERED PARALLAX DEPTH ---
+        // Calculate center offset relative to viewport: -1 (above) to +1 (below)
+        const centerDiff = rect.top + rect.height / 2 - viewportHeight / 2;
+        const norm = Math.max(-1, Math.min(1, centerDiff / viewportHeight));
+
+        // Background image layer: subtle gentle parallax (20px rate)
+        if (imageRef.current) {
+          const bgParallaxY = (norm * 18).toFixed(1);
+          imageRef.current.style.transform = `translate3d(0, ${bgParallaxY}px, 0) scale(1.02)`;
+        }
+
+        // Content layer: slight complementary rate (-8px) creating refined layered depth
+        if (contentRef.current) {
+          const contentParallaxY = (norm * -6).toFixed(1);
+          // Soft exit fade when scrolling far past top
+          let contentOpacity = 1;
+          if (rect.bottom < 160) {
+            contentOpacity = Math.max(0.2, rect.bottom / 160);
+          }
+          contentRef.current.style.transform = `translate3d(0, ${contentParallaxY}px, 0)`;
+          contentRef.current.style.opacity = `${contentOpacity.toFixed(3)}`;
+        }
+      }
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(updateMotion);
+    };
+
+    // Initial positioning
+    updateMotion();
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
 
     return () => {
-      observer.disconnect();
+      cancelAnimationFrame(animationFrameId);
+      viewportObserver.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, [isFirstSection]);
 
@@ -190,7 +200,7 @@ export const CinematicSection: React.FC<CinematicSectionProps> = ({
         theme
       )} ${className}`}
     >
-      {/* Background Image Layer (Separated from text and controls) */}
+      {/* Background Image Layer (Layer 0: Separate from text and controls) */}
       {bgImage && (
         <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden max-w-full">
           <img
@@ -201,14 +211,14 @@ export const CinematicSection: React.FC<CinematicSectionProps> = ({
             style={{
               opacity: isFirstSection ? 1 : isVisible ? 1 : 0,
               transform: isFirstSection
-                ? "scale(1.00)"
+                ? "translate3d(0, 0, 0) scale(1.00)"
                 : isVisible
-                ? "scale(1.00)"
-                : "scale(1.04)",
+                ? "translate3d(0, 0, 0) scale(1.02)"
+                : "translate3d(0, 20px, 0) scale(1.04)",
               transition: isFirstSection
                 ? "none"
-                : "opacity 1200ms cubic-bezier(0.22, 1, 0.36, 1), transform 1300ms cubic-bezier(0.22, 1, 0.36, 1)",
-              willChange: "opacity, transform",
+                : "opacity 1200ms cubic-bezier(0.22, 1, 0.36, 1), transform 1200ms cubic-bezier(0.22, 1, 0.36, 1)",
+              willChange: "transform, opacity",
             }}
             loading={priority || isFirstSection ? "eager" : "lazy"}
           />
@@ -216,7 +226,7 @@ export const CinematicSection: React.FC<CinematicSectionProps> = ({
         </div>
       )}
 
-      {/* Content Layer (Stable, never collpased, separate from image animation) */}
+      {/* Content Layer (Layer 1: Stable, crisp typography, layered motion) */}
       <div
         ref={contentRef}
         className={`relative z-10 w-full max-w-full pt-20 pb-12 sm:pt-24 sm:pb-16 lg:pt-28 lg:pb-20 ${containerClassName}`}
@@ -225,12 +235,12 @@ export const CinematicSection: React.FC<CinematicSectionProps> = ({
           transform: isFirstSection
             ? "translate3d(0, 0, 0)"
             : isVisible
-            ? "translateY(0px)"
-            : "translateY(20px)",
+            ? "translate3d(0, 0, 0)"
+            : "translate3d(0, 18px, 0)",
           transition: isFirstSection
             ? "none"
-            : "opacity 1000ms cubic-bezier(0.22, 1, 0.36, 1) 120ms, transform 1000ms cubic-bezier(0.22, 1, 0.36, 1) 120ms",
-          willChange: "opacity, transform",
+            : "opacity 1000ms cubic-bezier(0.22, 1, 0.36, 1) 100ms, transform 1000ms cubic-bezier(0.22, 1, 0.36, 1) 100ms",
+          willChange: "transform, opacity",
         }}
       >
         {children}
