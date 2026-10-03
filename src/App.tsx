@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { PageLoader } from "./components/PageLoader";
 import { AmbientParticles } from "./components/AmbientParticles";
+import { ScrollToTopButton } from "./components/ScrollToTopButton";
 
 function RouteScrollManager() {
   const { pathname } = useLocation();
@@ -48,6 +49,7 @@ export function App() {
       <PageLoader />
       <AmbientParticles />
       <ScrollProgress />
+      <ScrollToTopButton />
       <div className="min-h-screen flex flex-col bg-white text-[#111827] antialiased w-full max-w-full overflow-x-hidden relative">
         <Header />
         <main className="flex-grow w-full max-w-full overflow-x-hidden">
