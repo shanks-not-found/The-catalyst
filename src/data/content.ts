@@ -60,6 +60,12 @@ export const NAV_ITEMS = [
 // ==========================================
 export const SECTION_IMAGE_URL = "/section-image.jpg";
 
+// ==========================================
+// ABOUT SECTION IMAGE CONFIGURATION
+// Change this URL to replace the image on the About page hero section
+// ==========================================
+export const ABOUT_SECTION_IMAGE_URL = "/about-section.jpg";
+
 export const HOME_CONTENT = {
   hero: {
     taglineChip: "Where Conversations Create Momentum",
@@ -432,6 +438,16 @@ export const ABOUT_CONTENT = {
 };
 
 export const PARTNER_CONTENT = {
+  partnerWithTheRoom: {
+    eyebrow: "PARTNERSHIPS",
+    headline: "PARTNER WITH THE ROOM",
+    subhead:
+      "We’re partnering with brands, businesses and ecosystem organisations that want to be part of the conversations shaping the next generation of companies.",
+    buttons: [
+      { text: "BECOME A PARTNER →", href: "/contact" },
+      { text: "VIEW PARTNERSHIP OPTIONS →", href: "#two-ways-to-partner" },
+    ],
+  },
   hero: {
     eyebrow: "PARTNERSHIPS",
     headline: "BUILD WITH THE ROOM.",

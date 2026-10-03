@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import { SEOHead } from "../components/SEOHead";
@@ -6,8 +6,15 @@ import { PartnershipTable } from "../components/PartnershipTable";
 import { InKindPartnerTable } from "../components/InKindPartnerTable";
 import { PARTNER_CONTENT } from "../data/content";
 
+// ==================================================
+// CONFIGURATION: Set the partner section background image URL
+// Replace "PASTE_IMAGE_URL_HERE" with your image URL
+// ==================================================
+export const PARTNER_SECTION_IMAGE_URL = "PASTE_IMAGE_URL_HERE";
+
 export const Partner: React.FC = () => {
   const {
+    partnerWithTheRoom,
     hero,
     twoWaysToPartner,
     sponsorship,
@@ -16,23 +23,113 @@ export const Partner: React.FC = () => {
     finalCta,
   } = PARTNER_CONTENT;
 
+  // Viewport entry/exit detection for smooth fade + subtle zoom (1.04 -> 1.00)
+  const [isInView, setIsInView] = useState(true);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px",
+      }
+    );
+
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
+
+  // Renders the configured URL, falling back to local handshake photograph if placeholder is set
+  const resolvedImageSrc =
+    PARTNER_SECTION_IMAGE_URL && PARTNER_SECTION_IMAGE_URL !== "PASTE_IMAGE_URL_HERE"
+      ? PARTNER_SECTION_IMAGE_URL
+      : "/partner-with-room.jpg";
+
   return (
     <div className="w-full">
       <SEOHead
-        title="Partnerships — Build With The Room"
-        description="The Catalyst Room works with brands, businesses and ecosystem organisations looking to build sustained association across the series."
+        title="Partnerships — Partner With The Room"
+        description="We’re partnering with brands, businesses and ecosystem organisations that want to be part of the conversations shaping the next generation of companies."
       />
 
-      {/* 1. HERO SECTION */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-white text-[#111827] border-b border-gray-200 overflow-hidden">
+      {/* 1. PARTNER WITH THE ROOM WITH FULL-BLOCK BACKGROUND IMAGE */}
+      <section
+        ref={sectionRef}
+        className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-white text-[#111827] border-b border-gray-200 overflow-hidden"
+      >
+        {/* Full-width background image layer with scroll-triggered fade + subtle zoom */}
+        <div
+          className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden"
+          style={{
+            opacity: isInView ? 1 : 0,
+            transform: isInView ? "scale(1.00)" : "scale(1.04)",
+            transition: "opacity 1000ms ease-out, transform 1000ms ease-out",
+            willChange: "opacity, transform",
+          }}
+        >
+          <img
+            src={resolvedImageSrc}
+            alt="Partner With The Room — The Catalyst Room"
+            className="w-full h-full object-cover object-center lg:object-[center_35%]"
+            loading="eager"
+          />
+          {/* Subtle editorial gradient overlay ensuring strong text contrast while keeping photograph visible */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/40" />
+        </div>
+
+        {/* Content Layer above background image */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl space-y-6">
+            <span className="text-xs uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block animate-hero-eyebrow">
+              {partnerWithTheRoom.eyebrow}
+            </span>
+            <h1 className="font-editorial-heading text-4xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight animate-hero-headline">
+              {partnerWithTheRoom.headline}
+            </h1>
+            <p className="text-base sm:text-xl text-gray-700 font-sans leading-relaxed max-w-3xl animate-hero-subhead">
+              {partnerWithTheRoom.subhead}
+            </p>
+            <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+              <Link
+                to="/contact"
+                className="px-8 py-4 bg-[#FF5A1F] hover:bg-[#E04B14] text-white text-xs font-bold uppercase tracking-widest rounded-xs transition-all duration-200 hover:-translate-y-[1px] shadow-md hover:shadow-lg flex items-center justify-center space-x-2 group"
+              >
+                <span>BECOME A PARTNER</span>
+                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </Link>
+              <a
+                href="#two-ways-to-partner"
+                className="px-8 py-4 bg-[#FFF9F5] hover:bg-[#FFF2EB] border border-[#FF5A1F]/20 text-gray-900 text-xs font-bold uppercase tracking-widest rounded-xs transition-all duration-200 hover:-translate-y-[1px] flex items-center justify-center space-x-2 group"
+              >
+                <span>VIEW PARTNERSHIP OPTIONS</span>
+                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1 text-[#FF5A1F]" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. BUILD WITH THE ROOM */}
+      <section className="py-20 lg:py-28 bg-[#F7F7F7] text-[#111827] border-b border-gray-200 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl space-y-6">
             <span className="text-xs uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block">
               {hero.eyebrow}
             </span>
-            <h1 className="font-editorial-heading text-4xl sm:text-6xl font-bold text-gray-900 leading-tight">
+            <h2 className="font-editorial-heading text-3xl sm:text-5xl font-bold text-gray-900 leading-tight">
               {hero.headline}
-            </h1>
+            </h2>
             <p className="text-base sm:text-xl text-gray-600 font-sans leading-relaxed max-w-3xl">
               {hero.subhead}
             </p>

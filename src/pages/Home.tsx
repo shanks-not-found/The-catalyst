@@ -6,6 +6,12 @@ import { EventStrip } from "../components/EventStrip";
 import { ScrollReveal } from "../components/ScrollReveal";
 import { HOME_CONTENT, HERO_IMAGE_URL, SECTION_IMAGE_URL } from "../data/content";
 
+// ==================================================
+// CONFIGURATION: Set the hero background image URL
+// Replace "PASTE_IMAGE_URL_HERE" with your image URL
+// ==================================================
+export const HERO_BACKGROUND_IMAGE_URL = "PASTE_IMAGE_URL_HERE";
+
 export const Home: React.FC = () => {
   const {
     hero,
@@ -18,29 +24,31 @@ export const Home: React.FC = () => {
     buildWithTheRoom,
   } = HOME_CONTENT;
 
-  // Scroll-based fade animation for hero image (tied to viewport entry/exit)
-  const [imageOpacity, setImageOpacity] = useState(1.0);
-  const [imageTransform, setImageTransform] = useState(0);
+  // Viewport entry/exit detection for hero background image (fade + subtle zoom 1.04 -> 1.00)
+  const [isHeroInView, setIsHeroInView] = useState(true);
+  const heroSectionRef = useRef<HTMLElement>(null);
 
   // Scroll-based fade animation for Section 5 image
   const [sectionImageOpacity, setSectionImageOpacity] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const heroThreshold = 220; // Hero remains fully visible while viewing hero
-      const fadeDistance = 350; // Smoothly fades out as hero exits top of viewport
-
-      let opacity = 1.0;
-      if (scrollY > heroThreshold) {
-        const exitProgress = Math.min(1, (scrollY - heroThreshold) / fadeDistance);
-        opacity = 1.0 - exitProgress;
+    const heroObserver = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeroInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px",
       }
+    );
 
-      setImageOpacity(Math.max(0, opacity));
-      setImageTransform(Math.min(20, scrollY * 0.04));
+    const currentHeroRef = heroSectionRef.current;
+    if (currentHeroRef) {
+      heroObserver.observe(currentHeroRef);
+    }
 
+    const handleScroll = () => {
       // Section 5 image scroll observer
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect();
@@ -59,8 +67,20 @@ export const Home: React.FC = () => {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      if (currentHeroRef) {
+        heroObserver.unobserve(currentHeroRef);
+      }
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
+  // Renders the configured URL, falling back to existing hero image if set to placeholder
+  const resolvedHeroImageSrc =
+    HERO_BACKGROUND_IMAGE_URL && HERO_BACKGROUND_IMAGE_URL !== "PASTE_IMAGE_URL_HERE"
+      ? HERO_BACKGROUND_IMAGE_URL
+      : HERO_IMAGE_URL;
 
   return (
     <div className="w-full">
@@ -69,63 +89,59 @@ export const Home: React.FC = () => {
         description="A curated business media and ecosystem platform bringing founders, investors, CEOs, GCC leaders and industry experts into one room."
       />
 
-      {/* 1. HERO SECTION */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-24 bg-white text-[#111827] overflow-hidden">
-        {/* Subtle grid background */}
-        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:32px_32px] opacity-60 pointer-events-none" />
+      {/* 1. HERO SECTION WITH FULL-BLOCK BACKGROUND IMAGE */}
+      <section
+        ref={heroSectionRef}
+        className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-white text-[#111827] overflow-hidden border-b border-gray-100"
+      >
+        {/* Full-width background image layer with scroll-triggered fade + subtle zoom */}
+        <div
+          className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden"
+          style={{
+            opacity: isHeroInView ? 1 : 0,
+            transform: isHeroInView ? "scale(1.00)" : "scale(1.04)",
+            transition: "opacity 1000ms ease-out, transform 1000ms ease-out",
+            willChange: "opacity, transform",
+          }}
+        >
+          <img
+            src={resolvedHeroImageSrc}
+            alt="Where Conversations Create Momentum — The Catalyst Room"
+            className="w-full h-full object-cover object-center"
+            loading="eager"
+          />
+          {/* Subtle editorial gradient overlay ensuring strong text contrast while keeping photo visible */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/40" />
+        </div>
 
+        {/* Hero Content Layer */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left: Clearly Visible Editorial Photo with Soft Dissolving Outer Edges */}
-            <div className="lg:col-span-5 relative flex justify-center lg:justify-start order-2 lg:order-1">
-              <div
-                className="relative w-full max-w-md lg:max-w-none aspect-[4/3] pointer-events-none select-none"
-                style={{
-                  opacity: imageOpacity,
-                  transform: `translateY(${imageTransform}px)`,
-                  transition: "opacity 300ms ease-out, transform 300ms ease-out",
-                  maskImage:
-                    "radial-gradient(ellipse 85% 85% at 50% 50%, black 50%, rgba(0,0,0,0.85) 75%, transparent 98%)",
-                  WebkitMaskImage:
-                    "radial-gradient(ellipse 85% 85% at 50% 50%, black 50%, rgba(0,0,0,0.85) 75%, transparent 98%)",
-                }}
+          <div className="max-w-4xl space-y-6">
+            {/* Headline */}
+            <h1 className="animate-hero-headline font-editorial-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#111827] leading-[1.08]">
+              {hero.headline}
+            </h1>
+
+            {/* Subheadline */}
+            <p className="animate-hero-subhead text-base sm:text-xl text-gray-700 font-sans leading-relaxed max-w-3xl font-normal">
+              {hero.subheadline}
+            </p>
+
+            {/* CTA Group */}
+            <div className="animate-hero-cta pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+              <Link
+                to="/register"
+                className="px-8 py-4 bg-[#FF5A1F] hover:bg-[#E04B14] text-white text-xs font-bold uppercase tracking-widest rounded-xs transition-all duration-200 hover:-translate-y-[1px] shadow-md hover:shadow-lg flex items-center justify-center space-x-2 group"
               >
-                <img
-                  src={HERO_IMAGE_URL}
-                  alt="The Catalyst Room Business Conversation"
-                  className="w-full h-full object-cover object-center"
-                />
-              </div>
-            </div>
-
-            {/* Right: Existing Hero Content */}
-            <div className="lg:col-span-7 space-y-6 order-1 lg:order-2">
-              {/* Headline */}
-              <h1 className="animate-hero-headline font-editorial-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#111827] leading-[1.08]">
-                {hero.headline}
-              </h1>
-
-              {/* Subheadline */}
-              <p className="animate-hero-subhead text-base sm:text-xl text-gray-600 font-sans leading-relaxed max-w-3xl font-normal">
-                {hero.subheadline}
-              </p>
-
-              {/* CTA Group */}
-              <div className="animate-hero-cta pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                <Link
-                  to="/register"
-                  className="px-8 py-4 bg-[#FF5A1F] hover:bg-[#E04B14] text-white text-xs font-bold uppercase tracking-widest rounded-xs transition-all duration-200 hover:-translate-y-[1px] shadow-md hover:shadow-lg flex items-center justify-center space-x-2 group"
-                >
-                  <span>REGISTER</span>
-                  <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-                </Link>
-                <Link
-                  to={hero.secondaryCta.href}
-                  className="px-8 py-4 bg-[#FFF9F5] hover:bg-[#FFF2EB] border border-[#FF5A1F]/20 text-gray-900 text-xs font-bold uppercase tracking-widest rounded-xs transition-all duration-200 hover:-translate-y-[1px] flex items-center justify-center space-x-2 group"
-                >
-                  <span>{hero.secondaryCta.text}</span>
-                </Link>
-              </div>
+                <span>REGISTER</span>
+                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </Link>
+              <Link
+                to={hero.secondaryCta.href}
+                className="px-8 py-4 bg-[#FFF9F5] hover:bg-[#FFF2EB] border border-[#FF5A1F]/20 text-gray-900 text-xs font-bold uppercase tracking-widest rounded-xs transition-all duration-200 hover:-translate-y-[1px] flex items-center justify-center space-x-2 group"
+              >
+                <span>{hero.secondaryCta.text}</span>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Layers, ArrowRight } from "lucide-react";
 import { SEOHead } from "../components/SEOHead";
 import { ScrollReveal } from "../components/ScrollReveal";
 import { ABOUT_CONTENT } from "../data/content";
+
+// ==================================================
+// CONFIGURATION: Set the image URL for this section
+// Replace "PASTE_IMAGE_URL_HERE" with your image URL
+// ==================================================
+export const ABOUT_SECTION_IMAGE_URL = "PASTE_IMAGE_URL_HERE";
 
 export const About: React.FC = () => {
   const {
@@ -16,6 +22,39 @@ export const About: React.FC = () => {
     finalCta,
   } = ABOUT_CONTENT;
 
+  // Viewport entry/exit detection for smooth fade + subtle zoom (1.04 -> 1.00)
+  const [isInView, setIsInView] = useState(true);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px",
+      }
+    );
+
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
+
+  // Renders the configured URL, with local editorial photograph fallback if placeholder is set
+  const resolvedImageSrc =
+    ABOUT_SECTION_IMAGE_URL && ABOUT_SECTION_IMAGE_URL !== "PASTE_IMAGE_URL_HERE"
+      ? ABOUT_SECTION_IMAGE_URL
+      : "/about-section.jpg";
+
   return (
     <div className="w-full">
       <SEOHead
@@ -23,8 +62,32 @@ export const About: React.FC = () => {
         description="A room built for the people building what's next. The Catalyst Room is a curated business media and ecosystem platform."
       />
 
-      {/* 1. HERO SECTION */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-white text-[#111827] border-b border-gray-200 overflow-hidden">
+      {/* 1. HERO SECTION WITH FULL-BLOCK BACKGROUND IMAGE */}
+      <section
+        ref={sectionRef}
+        className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-white text-[#111827] border-b border-gray-200 overflow-hidden"
+      >
+        {/* Full-width background image layer with scroll-triggered fade + subtle zoom */}
+        <div
+          className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden"
+          style={{
+            opacity: isInView ? 1 : 0,
+            transform: isInView ? "scale(1.00)" : "scale(1.04)",
+            transition: "opacity 1000ms ease-out, transform 1000ms ease-out",
+            willChange: "opacity, transform",
+          }}
+        >
+          <img
+            src={resolvedImageSrc}
+            alt="A room built for the people building what's next — The Catalyst Room"
+            className="w-full h-full object-cover object-center"
+            loading="eager"
+          />
+          {/* Subtle editorial gradient overlay ensuring strong text contrast while keeping photo visible */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/40" />
+        </div>
+
+        {/* Text content positioned above background image */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl space-y-6">
             <span className="text-xs uppercase font-mono tracking-widest text-[#FF5A1F] font-bold block animate-hero-eyebrow">
@@ -33,7 +96,7 @@ export const About: React.FC = () => {
             <h1 className="font-editorial-heading text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight animate-hero-headline">
               {hero.headline}
             </h1>
-            <p className="text-base sm:text-xl text-gray-600 font-sans leading-relaxed max-w-3xl animate-hero-subhead">
+            <p className="text-base sm:text-xl text-gray-700 font-sans leading-relaxed max-w-3xl animate-hero-subhead">
               {hero.subhead}
             </p>
           </div>
